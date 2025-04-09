@@ -1,2 +1,3 @@
 # AnalisisGeoespacial
-2025-1
+
+Curso de Posgrado
