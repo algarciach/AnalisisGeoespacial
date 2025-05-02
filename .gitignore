@@ -1,3 +1,2 @@
-Data/Casos_positivos_de_COVID-19_en_Colombia._20250404.csv
-Data/*.shp
-Data/*.*
+Data/
+.venv/
