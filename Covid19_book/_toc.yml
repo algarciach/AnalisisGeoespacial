@@ -1,0 +1,14 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: 00_data
+- file: 01_point-pattern
+- file: 02_gml
+- file: 03_geovisualization
+- file: 04_spatial-relationships
+- file: 05_spatial-cluster
+- file: 06_SAR
+- file: 07_GWR
