@@ -28,4 +28,6 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
-          ghp-import -n -p -f Covid19_book/_build/html
+          pip install ghp-import
+          ghp-import -n -f Covid19_book/_build/html
+          git push -f https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }} gh-pages
