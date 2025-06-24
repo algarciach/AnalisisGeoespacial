@@ -360,7 +360,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -376,6 +378,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centroides">Centroides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dots-on-map">Dots on Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios-con-cfr-3">Municipios con CFR &gt; 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -387,6 +404,456 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="patron-de-puntos">
 <h1>Patron de Puntos<a class="headerlink" href="#patron-de-puntos" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">descartes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pysal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sbn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ctx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">DBSCAN</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib_map_utils.core.north_arrow</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorthArrow</span><span class="p">,</span> <span class="n">north_arrow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib_map_utils.core.scale_bar</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScaleBar</span><span class="p">,</span> <span class="n">scale_bar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/algarciach/AnalisisGeoespacial/raw/main/Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="centroides">
+<h2>Centroides<a class="headerlink" href="#centroides" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points_covid19_antioquia</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">centroid</span>
+<span class="n">points_covid19_antioquia</span> <span class="o">=</span> <span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">set_geometry</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG:4326
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 14 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   densidad             125 non-null    float64 
+ 10  muertes_covid19      125 non-null    int64   
+ 11  recuperados_covid19  125 non-null    int64   
+ 12  cfr                  125 non-null    float64 
+ 13  geometry             125 non-null    geometry
+dtypes: float64(6), geometry(1), int64(3), object(4)
+memory usage: 13.8+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>codigo_subregion</th>
+      <th>nombre_subregion</th>
+      <th>area_municipio</th>
+      <th>altitud</th>
+      <th>temperatura</th>
+      <th>humedad_relativa</th>
+      <th>poblacion</th>
+      <th>densidad</th>
+      <th>muertes_covid19</th>
+      <th>recuperados_covid19</th>
+      <th>cfr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05001</td>
+      <td>MEDELLIN</td>
+      <td>01</td>
+      <td>VALLE DE ABURRA</td>
+      <td>374.834005</td>
+      <td>2059.003077</td>
+      <td>18.203481</td>
+      <td>80.582299</td>
+      <td>2616335</td>
+      <td>6979.983054</td>
+      <td>10354</td>
+      <td>537729</td>
+      <td>1.889130</td>
+      <td>POINT (-75.61104 6.25759)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05002</td>
+      <td>ABEJORRAL</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>507.141095</td>
+      <td>1947.128522</td>
+      <td>17.845754</td>
+      <td>80.265871</td>
+      <td>21468</td>
+      <td>42.331415</td>
+      <td>24</td>
+      <td>579</td>
+      <td>3.980100</td>
+      <td>POINT (-75.43847 5.80373)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05004</td>
+      <td>ABRIAQUI</td>
+      <td>06</td>
+      <td>OCCIDENTE</td>
+      <td>296.894050</td>
+      <td>2371.335448</td>
+      <td>15.912880</td>
+      <td>85.717115</td>
+      <td>2855</td>
+      <td>9.616225</td>
+      <td>1</td>
+      <td>78</td>
+      <td>1.265823</td>
+      <td>POINT (-76.08598 6.62755)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05021</td>
+      <td>ALEJANDRIA</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>128.932153</td>
+      <td>1545.100614</td>
+      <td>20.538783</td>
+      <td>80.036523</td>
+      <td>4955</td>
+      <td>38.431065</td>
+      <td>6</td>
+      <td>176</td>
+      <td>3.296703</td>
+      <td>POINT (-75.0906 6.36553)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05030</td>
+      <td>AMAGA</td>
+      <td>08</td>
+      <td>SUROESTE</td>
+      <td>84.132477</td>
+      <td>1513.740970</td>
+      <td>21.093243</td>
+      <td>78.477931</td>
+      <td>32412</td>
+      <td>385.249562</td>
+      <td>54</td>
+      <td>1440</td>
+      <td>3.614458</td>
+      <td>POINT (-75.708 6.03292)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Para efectos del análisis de eventos, se construye una variable binaria que indica la ocurrencia de un evento crítico. Esta toma el valor de 1 si la tasa de letalidad (CFR) supera el umbral del 3% y 0 en caso contrario.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;evento_CFR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;evento_CFR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   densidad             125 non-null    float64 
+ 10  muertes_covid19      125 non-null    int64   
+ 11  recuperados_covid19  125 non-null    int64   
+ 12  cfr                  125 non-null    float64 
+ 13  geometry             125 non-null    geometry
+ 14  evento_CFR           125 non-null    int64   
+dtypes: float64(6), geometry(1), int64(4), object(4)
+memory usage: 14.8+ KB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>evento_CFR
+0    67
+1    58
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># + tags=[&quot;hide-output&quot;]</span>
+<span class="o">%</span><span class="k">pip</span> install geopandas
+<span class="o">%</span><span class="k">pip</span> install plotly
+<span class="o">%</span><span class="k">pip</span> install matplotlib-map-utils
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: geopandas in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (1.0.1)
+Requirement already satisfied: numpy&gt;=1.22 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.2.6)
+Requirement already satisfied: pyogrio&gt;=0.7.2 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (0.11.0)
+Requirement already satisfied: packaging in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (25.0)
+Requirement already satisfied: pandas&gt;=1.4.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.2.3)
+Requirement already satisfied: pyproj&gt;=3.3.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (3.7.1)
+Requirement already satisfied: shapely&gt;=2.0.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.1.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from pandas&gt;=1.4.0-&gt;geopandas) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from pandas&gt;=1.4.0-&gt;geopandas) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from pandas&gt;=1.4.0-&gt;geopandas) (2025.2)
+Requirement already satisfied: certifi in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from pyogrio&gt;=0.7.2-&gt;geopandas) (2025.4.26)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.4.0-&gt;geopandas) (1.17.0)
+Note: you may need to restart the kernel to use updated packages.
+Requirement already satisfied: plotly in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (6.1.2)
+Requirement already satisfied: narwhals&gt;=1.15.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from plotly) (1.41.0)
+Requirement already satisfied: packaging in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from plotly) (25.0)
+Note: you may need to restart the kernel to use updated packages.
+Requirement already satisfied: matplotlib-map-utils in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (3.0.0)
+Requirement already satisfied: matplotlib&gt;=3.9.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (3.10.3)
+Requirement already satisfied: cartopy&gt;=0.23.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (0.24.1)
+Requirement already satisfied: great-circle-calculator&gt;=1.3.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (1.3.1)
+Requirement already satisfied: numpy&gt;=1.23 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.2.6)
+Requirement already satisfied: shapely&gt;=1.8 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.1.1)
+Requirement already satisfied: packaging&gt;=21 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (25.0)
+Requirement already satisfied: pyshp&gt;=2.3 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.3.1)
+Requirement already satisfied: pyproj&gt;=3.3.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (3.7.1)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (4.58.1)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (1.4.7)
+Requirement already satisfied: pillow&gt;=8 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (11.2.1)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (3.2.3)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (2.9.0.post0)
+Requirement already satisfied: certifi in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from pyproj&gt;=3.3.1-&gt;cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2025.4.26)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (1.17.0)
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h2>
+<section id="dots-on-map">
+<h3>Dots on Map<a class="headerlink" href="#dots-on-map" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract coordinates from geometry</span>
+<span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">x</span>
+<span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">y</span>
+
+<span class="c1"># Filter points with evento_CFR &gt; 3</span>
+<span class="n">CFR3_points</span> <span class="o">=</span> <span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="n">points_covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;evento_CFR&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_mapbox</span><span class="p">(</span>
+    <span class="n">CFR3_points</span><span class="p">,</span>
+    <span class="n">lat</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">lon</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span>
+    <span class="n">size_max</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">zoom</span><span class="o">=</span><span class="mf">6.3</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;carto-positron&quot;</span><span class="p">,</span>
+    <span class="n">mapbox_zoom</span><span class="o">=</span><span class="mf">6.3</span><span class="p">,</span>
+    <span class="n">mapbox_center</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="mf">6.25</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">75.5</span><span class="p">},</span>
+    <span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="n">mapbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">bearing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">pitch</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">center</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="mf">6.25</span><span class="p">,</span> <span class="n">lon</span><span class="o">=-</span><span class="mf">75.5</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="municipios-con-cfr-3">
+<h3>Municipios con CFR &gt; 3<a class="headerlink" href="#municipios-con-cfr-3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">points_covid19_antioquia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;evento_CFR&#39;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">legend_kwds</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;CFR &gt; 3%&#39;</span><span class="p">},</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c040df6dbbdc26eb47065cdb0314418aa91e85d0d9a8324e35b4e24dfd0abfe9.png" src="_images/c040df6dbbdc26eb47065cdb0314418aa91e85d0d9a8324e35b4e24dfd0abfe9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ctx</span>
+<span class="n">joint_axes</span> <span class="o">=</span> <span class="n">sbn</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">CFR3_points</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4bee7a25adf90283750332c1d2570d6f002cd1236a7c1c0fe7d0b96b5ad2db37.png" src="_images/4bee7a25adf90283750332c1d2570d6f002cd1236a7c1c0fe7d0b96b5ad2db37.png" />
+</div>
+</div>
+</section>
+<section id="irregular-lattices">
+<h3>Irregular lattices<a class="headerlink" href="#irregular-lattices" title="Link to this heading">#</a></h3>
+<p>Usaremos las areas de las subregiones para determinar la intensidad de puntos en las zonas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subregiones_antioquia</span> <span class="o">=</span>  <span class="n">gdf</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">CFR3_points</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+    <span class="n">c</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Subregiones con CFR &gt; 3</span><span class="si">% e</span><span class="s1">n Antioquia&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitud&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitud&#39;</span><span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/288e636f1558dbf5f2c6997ec46a28cae65de5b3ebcdf9e70fc5022d48324870.png" src="_images/288e636f1558dbf5f2c6997ec46a28cae65de5b3ebcdf9e70fc5022d48324870.png" />
+</div>
+</div>
+<p>Determinar cuantos municipios con CFR &gt; 3 por subregion</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CFR3_points_by_subregion</span> <span class="o">=</span> <span class="n">CFR3_points</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;codigo_subregion&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+
+<span class="n">suberegiones</span> <span class="o">=</span> <span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">CFR3_points_by_subregion</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;codigo_subregion&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+<span class="n">suberegiones</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">suberegiones</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">suberegiones</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Oranges&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CFR &gt; 3 por subregión&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Longitud&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitud&#39;</span><span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">suberegiones</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5628f0992aa6bb3182679b4c4b33ac63eb77ae4f07223a36fdf2593c5acaae53.png" src="_images/5628f0992aa6bb3182679b4c4b33ac63eb77ae4f07223a36fdf2593c5acaae53.png" />
+</div>
+</div>
+</section>
+<section id="regular-lattices-hex-binning">
+<h3>Regular lattices: Hex-binning<a class="headerlink" href="#regular-lattices-hex-binning" title="Link to this heading">#</a></h3>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -443,6 +910,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#centroides">Centroides</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dots-on-map">Dots on Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios-con-cfr-3">Municipios con CFR &gt; 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
