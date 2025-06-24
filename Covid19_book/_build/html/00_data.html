@@ -421,8 +421,6 @@ document.write(`
 <li><p>Humedad relativa media anual</p></li>
 <li><p>Temperatura media anual</p></li>
 <li><p>Altitud media</p></li>
-<li><p>Número de muertos por COVID-19</p></li>
-<li><p>Número de recuperados por COVID-19</p></li>
 </ul>
 <p>La variable objetivo es continua y corresponde a la <em>Tasa o Razón de Letalidad</em> (CFR, por sus siglas en inglés Case Fatality Rate), como indicador de la mortalidad causada por el COVID-19. Este índice se calcula como el número de muertes conocidas dividido entre el número total de casos confirmados, expresado en porcentaje (Chaparro_2021).</p>
 <div class="math notranslate nohighlight">
@@ -529,9 +527,7 @@ document.write(`
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: geopandas in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (1.0.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.22 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.2.6)
+Requirement already satisfied: numpy&gt;=1.22 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.2.6)
 Requirement already satisfied: pyogrio&gt;=0.7.2 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (0.11.0)
 Requirement already satisfied: packaging in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (25.0)
 Requirement already satisfied: pandas&gt;=1.4.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from geopandas) (2.2.3)
@@ -561,7 +557,9 @@ Requirement already satisfied: packaging in /usr/local/Caskroom/miniforge/base/e
 Requirement already satisfied: matplotlib&gt;=3.9.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (3.10.3)
 Requirement already satisfied: cartopy&gt;=0.23.0 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (0.24.1)
 Requirement already satisfied: great-circle-calculator&gt;=1.3.1 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from matplotlib-map-utils) (1.3.1)
-Requirement already satisfied: numpy&gt;=1.23 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.2.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.23 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.2.6)
 Requirement already satisfied: shapely&gt;=1.8 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.1.1)
 Requirement already satisfied: packaging&gt;=21 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (25.0)
 Requirement already satisfied: pyshp&gt;=2.3 in /usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.3.1)
