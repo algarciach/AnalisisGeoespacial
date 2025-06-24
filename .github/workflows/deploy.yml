@@ -24,7 +24,7 @@ jobs:
           pip install jupyter-book ghp-import
 
       - name: Build Jupyter Book
-        run: jupyter-book build covid_book/
+        run: jupyter-book build Covid19_book/
 
       - name: Deploy to GitHub Pages
         run: |
