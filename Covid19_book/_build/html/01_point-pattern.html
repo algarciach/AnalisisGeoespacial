@@ -389,6 +389,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios-con-cfr-3">Municipios con CFR &gt; 3</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation-kde">Kernel Density Estimation (KDE)</a></li>
 </ul>
 </li>
 </ul>
@@ -852,6 +853,54 @@ Note: you may need to restart the kernel to use updated packages.
 </section>
 <section id="regular-lattices-hex-binning">
 <h3>Regular lattices: Hex-binning<a class="headerlink" href="#regular-lattices-hex-binning" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">hb</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span>
+    <span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">gridsize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis_r&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">hb</span><span class="p">)</span> 
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0aa303efde8d72279e64236b580d4dd98073d10fc011e733b44a67882cc2f928.png" src="_images/0aa303efde8d72279e64236b580d4dd98073d10fc011e733b44a67882cc2f928.png" />
+</div>
+</div>
+</section>
+<section id="kernel-density-estimation-kde">
+<h3>Kernel Density Estimation (KDE)<a class="headerlink" href="#kernel-density-estimation-kde" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="n">sbn</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis_r&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span>
+<span class="p">)</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7560d7b033d3ef2ffdae9c9646f813a8141c0c1242d7b6e1f91200ca9b1b7c26.png" src="_images/7560d7b033d3ef2ffdae9c9646f813a8141c0c1242d7b6e1f91200ca9b1b7c26.png" />
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -926,6 +975,7 @@ Note: you may need to restart the kernel to use updated packages.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios-con-cfr-3">Municipios con CFR &gt; 3</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation-kde">Kernel Density Estimation (KDE)</a></li>
 </ul>
 </li>
 </ul>
