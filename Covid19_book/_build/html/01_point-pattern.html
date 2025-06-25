@@ -390,6 +390,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation-kde">Kernel Density Estimation (KDE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centrography">Centrography</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tendency">Tendency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispersion">Dispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviational-ellipse">Standard Deviational Ellipse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extent">Extent</a></li>
 </ul>
 </li>
 </ul>
@@ -902,6 +909,309 @@ Note: you may need to restart the kernel to use updated packages.
 </div>
 </div>
 </section>
+<section id="centrography">
+<h3>Centrography<a class="headerlink" href="#centrography" title="Link to this heading">#</a></h3>
+<section id="tendency">
+<h4>Tendency<a class="headerlink" href="#tendency" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pointpats</span><span class="w"> </span><span class="kn">import</span> <span class="n">centrography</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">))</span>
+
+<span class="n">mean_center</span> <span class="o">=</span> <span class="n">centrography</span><span class="o">.</span><span class="n">mean_center</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+<span class="n">med_center</span> <span class="o">=</span> <span class="n">centrography</span><span class="o">.</span><span class="n">euclidean_median</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joint_axes</span> <span class="o">=</span> <span class="n">sbn</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">mean_center</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean Center&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mean_center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">med_center</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Median Center&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">med_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">med_center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">)</span>
+
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2206e2af70aef12b9dfb869d712635a2dbe153c46303bbe48e1097c3543799f1.png" src="_images/2206e2af70aef12b9dfb869d712635a2dbe153c46303bbe48e1097c3543799f1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="dispersion">
+<h3>Dispersion<a class="headerlink" href="#dispersion" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centrography</span><span class="o">.</span><span class="n">std_distance</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.975383555052916)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-deviational-ellipse">
+<h3>Standard Deviational Ellipse<a class="headerlink" href="#standard-deviational-ellipse" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="n">centrography</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span>
+    <span class="n">coords</span><span class="p">,</span> 
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">rotation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.7840363917636705),
+ np.float64(1.0009044428123037),
+ np.float64(-0.381593606028805))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot</span>
+<span class="n">joint_axes</span> <span class="o">=</span> <span class="n">sbn</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">CFR3_points</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">9</span>
+<span class="p">)</span>
+
+<span class="c1"># Add mean center</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">mean_center</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean Center&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">mean_center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add median center</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">med_center</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Median Center&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">med_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">med_center</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;limegreen&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the ellipse</span>
+<span class="n">ellipse</span> <span class="o">=</span> <span class="n">Ellipse</span><span class="p">(</span>
+    <span class="n">xy</span><span class="o">=</span><span class="n">mean_center</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">major</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">minor</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">rotation</span><span class="p">),</span>  <span class="c1"># Convert radians to degrees</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+    <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Std. Ellipse&#39;</span>
+<span class="p">)</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">ellipse</span><span class="p">)</span>
+
+<span class="c1"># Legend</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Add basemap</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+
+<span class="c1"># Hide axis</span>
+<span class="n">joint_axes</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8e2730b30aac4bc56a9481108654e99ca5068338e7afaa3d94cecfd17d977f61.png" src="_images/8e2730b30aac4bc56a9481108654e99ca5068338e7afaa3d94cecfd17d977f61.png" />
+</div>
+</div>
+</section>
+<section id="extent">
+<h3>Extent<a class="headerlink" href="#extent" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-75.43847449   5.80372897]
+ [-75.09059702   6.36553412]
+ [-75.7080031    6.03292199]
+ [-74.98127311   6.97769068]
+ [-75.92459671   5.62395126]
+ [-75.71594966   6.1214303 ]
+ [-75.10848962   7.19311041]
+ [-75.90426747   6.53570773]
+ [-76.41478301   8.61138712]
+ [-75.95649246   6.18578361]
+ [-75.22369249   7.66515825]
+ [-75.99351498   6.42346364]
+ [-75.29224952   7.03542947]
+ [-76.02689633   6.81495037]
+ [-74.73354817   6.33797388]
+ [-75.63081024   5.55526547]
+ [-76.65668414   7.78916729]
+ [-75.03501878   7.86794983]
+ [-76.63964213   7.63166564]
+ [-75.08253096   6.55008115]
+ [-75.90014678   6.05746868]
+ [-75.78331099   6.32645515]
+ [-74.66427699   7.70463362]
+ [-75.67837372   5.88716956]
+ [-76.33198554   6.69136668]
+ [-75.12763646   6.12338072]
+ [-75.7497221    6.21452562]
+ [-75.35429023   5.94043468]
+ [-75.78300046   6.72399093]
+ [-74.72370656   6.54330091]
+ [-76.46302608   7.32954   ]
+ [-75.19457019   5.58127531]
+ [-76.67699198   8.4937355 ]
+ [-74.79242149   7.99046768]
+ [-75.22350906   6.23239637]
+ [-74.5287421    6.48192227]
+ [-74.68408347   6.13917534]
+ [-74.68620541   5.95483902]
+ [-75.79222753   6.90100051]
+ [-74.90720525   6.19389245]
+ [-74.97660919   5.87913421]
+ [-75.70310727   6.43830041]
+ [-76.31664143   8.379156  ]
+ [-75.58330371   5.87898496]
+ [-75.05934898   5.76250691]
+ [-75.74580903   6.52016455]
+ [-75.70979974   5.67375857]
+ [-75.82871144   5.87106456]
+ [-75.79966005   6.05834997]
+ [-75.71033059   7.01369575]
+ [-76.72380317   7.99837236]
+ [-76.13318557   6.91391687]
+ [-76.25906482   6.33534134]
+ [-75.40094502   7.26540421]
+ [-74.75459316   6.83825032]
+ [-75.77620117   5.9559393 ]
+ [-74.75564986   6.71687047]
+ [-74.85848879   7.4740075 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">convex_hull_vertices</span>  <span class="o">=</span> <span class="n">centrography</span><span class="o">.</span><span class="n">hull</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">convex_hull_vertices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-74.68620541   5.95483902]
+ [-74.5287421    6.48192227]
+ [-74.66427699   7.70463362]
+ [-74.79242149   7.99046768]
+ [-76.41478301   8.61138712]
+ [-76.67699198   8.4937355 ]
+ [-76.72380317   7.99837236]
+ [-76.63964213   7.63166564]
+ [-76.25906482   6.33534134]
+ [-75.92459671   5.62395126]
+ [-75.63081024   5.55526547]
+ [-75.19457019   5.58127531]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">libpysal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha_shape</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">circs</span> <span class="o">=</span> <span class="n">libpysal</span><span class="o">.</span><span class="n">cg</span><span class="o">.</span><span class="n">alpha_shape_auto</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">return_circles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha_shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f0518ba07b94b63198016fa48209e72016d8858c6102154aac727b3628216e4a.svg" src="_images/f0518ba07b94b63198016fa48209e72016d8858c6102154aac727b3628216e4a.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+<span class="c1"># Create GeoSeries for alpha shape and convex hull</span>
+<span class="n">gdf_alpha</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">alpha_shape</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+<span class="n">gdf_hull</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">Polygon</span><span class="p">(</span><span class="n">convex_hull_vertices</span><span class="p">)],</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="c1">#create figure and axis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Plot alpha shape green and convex hull blue</span>
+<span class="n">gdf_alpha</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Alpha Shape&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">gdf_hull</span><span class="o">.</span><span class="n">boundary</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Convex Hull&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Plot points</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">coords</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Points&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plor circles</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">circle</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">circs</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Bounding Circle&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span>
+            <span class="n">circle</span><span class="p">,</span> 
+            <span class="n">radius</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> 
+            <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> 
+            <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> 
+            <span class="n">label</span><span class="o">=</span><span class="n">label</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    
+<span class="c1"># Add basemap</span>
+<span class="n">ctx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3f424baa8f9bb765fdcfb426a32d505a9a5d3ecb1082b13416fc535f57a45168.png" src="_images/3f424baa8f9bb765fdcfb426a32d505a9a5d3ecb1082b13416fc535f57a45168.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -976,6 +1286,13 @@ Note: you may need to restart the kernel to use updated packages.
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#irregular-lattices">Irregular lattices</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-lattices-hex-binning">Regular lattices: Hex-binning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-density-estimation-kde">Kernel Density Estimation (KDE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centrography">Centrography</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tendency">Tendency</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dispersion">Dispersion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviational-ellipse">Standard Deviational Ellipse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extent">Extent</a></li>
 </ul>
 </li>
 </ul>
