@@ -399,6 +399,244 @@ document.write(`
 <h1>Modelos de Regresion Espacial SAR<a class="headerlink" href="#modelos-de-regresion-espacial-sar" title="Link to this heading">#</a></h1>
 <section id="autocorrelacion-endogena-con-la-variable-dependiente">
 <h2>Autocorrelación Endógena con la variable dependiente<a class="headerlink" href="#autocorrelacion-endogena-con-la-variable-dependiente" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libpysal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">spreg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/algarciach/AnalisisGeoespacial/raw/main/Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;density_cfr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;cfr&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;area_municipio&#39;</span><span class="p">])</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;density_cfr&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">independent_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;densidad&#39;</span><span class="p">,</span> <span class="s1">&#39;altitud&#39;</span><span class="p">,</span> <span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad_relativa&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">independent_vars</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">Queen</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+
+<span class="n">wx_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">independent_vars</span><span class="p">:</span>
+    <span class="n">wx_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;w_</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">libpysal</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">spatial_lag</span><span class="o">.</span><span class="n">lag_spatial</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X_scaled_df</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+
+<span class="n">wx_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">wx_dict</span><span class="p">)</span>
+<span class="n">slx_exog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_scaled_df</span><span class="p">,</span> <span class="n">wx_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ols_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> 
+                      <span class="n">slx_exog</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr&#39;</span><span class="p">,</span> 
+                      <span class="n">name_x</span><span class="o">=</span><span class="n">slx_exog</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                      <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/nq/kj34bm5140bgwbktdx1z94cm0000gn/T/ipykernel_25034/2596927528.py:11: FutureWarning: `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
+  w = Queen.from_dataframe(gdf)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
+-----------------------------------------
+Data set            :     unknown
+Weights matrix      :        None
+Dependent Variable  :log_density_cfr                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           9
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         116
+R-squared           :      0.2656
+Adjusted R-squared  :      0.2150
+Sum squared residual:   0.0237285                F-statistic           :      5.2449
+Sigma-square        :       0.000                Prob(F-statistic)     :   1.301e-05
+S.E. of regression  :       0.014                Log likelihood        :     358.220
+Sigma-square ML     :       0.000                Akaike info criterion :    -698.439
+S.E of regression ML:      0.0138                Schwarz criterion     :    -672.984
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01507         0.00139        10.82174         0.00000
+            densidad         0.00433         0.00171         2.53201         0.01268
+             altitud         0.03940         0.01706         2.30955         0.02268
+         temperatura         0.03610         0.01604         2.25107         0.02627
+    humedad_relativa        -0.00065         0.00278        -0.23342         0.81585
+          w_densidad         0.00088         0.00057         1.54355         0.12542
+           w_altitud        -0.00807         0.00479        -1.68423         0.09483
+       w_temperatura        -0.00793         0.00468        -1.69622         0.09253
+  w_humedad_relativa        -0.00037         0.00070        -0.52933         0.59759
+------------------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER          52.326
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2        889.661           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test                8         36.288           0.0000
+Koenker-Bassett test              8          5.243           0.7313
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  w = Queen.from_dataframe(gdf)
+REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
+-----------------------------------------
+Data set            :     unknown
+Weights matrix      :        None
+Dependent Variable  :log_density_cfr                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           9
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         116
+R-squared           :      0.2656
+Adjusted R-squared  :      0.2150
+Sum squared residual:   0.0237285                F-statistic           :      5.2449
+Sigma-square        :       0.000                Prob(F-statistic)     :   1.301e-05
+S.E. of regression  :       0.014                Log likelihood        :     358.220
+Sigma-square ML     :       0.000                Akaike info criterion :    -698.439
+S.E of regression ML:      0.0138                Schwarz criterion     :    -672.984
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01507         0.00139        10.82174         0.00000
+            densidad         0.00433         0.00171         2.53201         0.01268
+             altitud         0.03940         0.01706         2.30955         0.02268
+         temperatura         0.03610         0.01604         2.25107         0.02627
+...
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test                8         36.288           0.0000
+Koenker-Bassett test              8          5.243           0.7313
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+<p><strong>Conclusiones</strong></p>
+<p>Este modelo OLS es el primero que muestra la densidad poblacional como un predictor estadísticamente significativo, junto con la altitud y la temperatura. La relación con la variable dependiente transformada (log_density_cfr) es positiva para estas tres variables, sugiriendo que a medida que aumentan la densidad, altitud y temperatura, también lo hace la densidad del logaritmo de la Tasa de Letalidad.</p>
+<p>Aunque el poder explicativo general (R-cuadrado del 26.56%) es moderado y el modelo es globalmente significativo, la indicación de heterocedasticidad por la prueba de Breusch-Pagan es una preocupación importante. La heterocedasticidad significa que los errores estándar y, por lo tanto, los p-valores y los intervalos de confianza, podrían ser incorrectos. Esto podría llevar a conclusiones engañosas sobre la significancia de tus variables.</p>
+<p>Para abordar la heterocedasticidad, podrías considerar:</p>
+<p>Utilizar errores estándar robustos.</p>
+<p>Transformaciones adicionales de tus variables.</p>
+<p>Modelos alternativos que sean más robustos a la heterocedasticidad (por ejemplo, ciertos tipos de GLM o modelos que modelen la varianza).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_error_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Error_Het</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
+                                         <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span>
+                                         <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span>
+                                         <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spatial_error_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: GM SPATIALLY WEIGHTED LEAST SQUARES (HET)
+------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           5
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         120
+Pseudo R-squared    :      0.2378
+N. of iterations    :           1                Step1c computed       :          No
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01616         0.00200         8.07299         0.00000
+            densidad         0.00532         0.00178         2.99409         0.00275
+             altitud         0.02272         0.00911         2.49296         0.01267
+         temperatura         0.02020         0.00944         2.14022         0.03234
+    humedad_relativa        -0.00112         0.00115        -0.97549         0.32932
+              lambda         0.05863         0.02047         2.86342         0.00419
+------------------------------------------------------------------------------------
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_lag_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Lag</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
+                                 <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span>
+                                 <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span>
+                                 <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spatial_lag_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: SPATIAL TWO STAGE LEAST SQUARES
+--------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           6
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         119
+Pseudo R-squared    :      0.2334
+Spatial Pseudo R-squared:  0.2270
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01375         0.00428         3.21669         0.00130
+            densidad         0.00565         0.00158         3.57898         0.00034
+             altitud         0.01742         0.01075         1.61967         0.10530
+         temperatura         0.01522         0.01018         1.49605         0.13464
+    humedad_relativa        -0.00126         0.00146        -0.86226         0.38854
+W_log_density_cfr_rec         0.01152         0.05822         0.19786         0.84316
+------------------------------------------------------------------------------------
+Instrumented: W_log_density_cfr_rec
+Instruments: W_altitud, W_densidad, W_humedad_relativa, W_temperatura
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+TEST                              DF         VALUE           PROB
+Anselin-Kelejian Test             1          0.189           0.6641
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the &#39;simple&#39; method.
+            Variable         Direct        Indirect          Total
+            densidad         0.0056          0.0001          0.0057
+             altitud         0.0174          0.0002          0.0176
+         temperatura         0.0152          0.0002          0.0154
+    humedad_relativa        -0.0013         -0.0000         -0.0013
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
