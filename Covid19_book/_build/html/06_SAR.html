@@ -451,59 +451,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/nq/kj34bm5140bgwbktdx1z94cm0000gn/T/ipykernel_25034/2596927528.py:11: FutureWarning: `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
-  w = Queen.from_dataframe(gdf)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
-------------------
-
-SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
------------------------------------------
-Data set            :     unknown
-Weights matrix      :        None
-Dependent Variable  :log_density_cfr                Number of Observations:         125
-Mean dependent var  :      0.0146                Number of Variables   :           9
-S.D. dependent var  :      0.0161                Degrees of Freedom    :         116
-R-squared           :      0.2656
-Adjusted R-squared  :      0.2150
-Sum squared residual:   0.0237285                F-statistic           :      5.2449
-Sigma-square        :       0.000                Prob(F-statistic)     :   1.301e-05
-S.E. of regression  :       0.014                Log likelihood        :     358.220
-Sigma-square ML     :       0.000                Akaike info criterion :    -698.439
-S.E of regression ML:      0.0138                Schwarz criterion     :    -672.984
-
-------------------------------------------------------------------------------------
-            Variable     Coefficient       Std.Error     t-Statistic     Probability
-------------------------------------------------------------------------------------
-            CONSTANT         0.01507         0.00139        10.82174         0.00000
-            densidad         0.00433         0.00171         2.53201         0.01268
-             altitud         0.03940         0.01706         2.30955         0.02268
-         temperatura         0.03610         0.01604         2.25107         0.02627
-    humedad_relativa        -0.00065         0.00278        -0.23342         0.81585
-          w_densidad         0.00088         0.00057         1.54355         0.12542
-           w_altitud        -0.00807         0.00479        -1.68423         0.09483
-       w_temperatura        -0.00793         0.00468        -1.69622         0.09253
-  w_humedad_relativa        -0.00037         0.00070        -0.52933         0.59759
-------------------------------------------------------------------------------------
-
-REGRESSION DIAGNOSTICS
-MULTICOLLINEARITY CONDITION NUMBER          52.326
-
-TEST ON NORMALITY OF ERRORS
-TEST                             DF        VALUE           PROB
-Jarque-Bera                       2        889.661           0.0000
-
-DIAGNOSTICS FOR HETEROSKEDASTICITY
-RANDOM COEFFICIENTS
-TEST                             DF        VALUE           PROB
-Breusch-Pagan test                8         36.288           0.0000
-Koenker-Bassett test              8          5.243           0.7313
-================================ END OF REPORT =====================================
-</pre></div>
-</div>
-</div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  w = Queen.from_dataframe(gdf)
 REGRESSION RESULTS
@@ -540,11 +487,6 @@ Koenker-Bassett test              8          5.243           0.7313
 </div>
 <p><strong>Conclusiones</strong></p>
 <p>Este modelo OLS es el primero que muestra la densidad poblacional como un predictor estadísticamente significativo, junto con la altitud y la temperatura. La relación con la variable dependiente transformada (log_density_cfr) es positiva para estas tres variables, sugiriendo que a medida que aumentan la densidad, altitud y temperatura, también lo hace la densidad del logaritmo de la Tasa de Letalidad.</p>
-<p>Aunque el poder explicativo general (R-cuadrado del 26.56%) es moderado y el modelo es globalmente significativo, la indicación de heterocedasticidad por la prueba de Breusch-Pagan es una preocupación importante. La heterocedasticidad significa que los errores estándar y, por lo tanto, los p-valores y los intervalos de confianza, podrían ser incorrectos. Esto podría llevar a conclusiones engañosas sobre la significancia de tus variables.</p>
-<p>Para abordar la heterocedasticidad, podrías considerar:</p>
-<p>Utilizar errores estándar robustos.</p>
-<p>Transformaciones adicionales de tus variables.</p>
-<p>Modelos alternativos que sean más robustos a la heterocedasticidad (por ejemplo, ciertos tipos de GLM o modelos que modelen la varianza).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_error_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Error_Het</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
