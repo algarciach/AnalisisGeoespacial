@@ -422,7 +422,7 @@ document.write(`
 <h2>Agrupamiento Espacial (Regionalización)<a class="headerlink" href="#agrupamiento-espacial-regionalizacion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;altitud&#39;</span><span class="p">,</span> <span class="s1">&#39;densidad&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad_relativa&#39;</span><span class="p">,</span><span class="s1">&#39;temperatura&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -448,21 +448,21 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sample index&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cluster Distance&#39;</span><span class="p">)</span>
-<span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="mi">83</span><span class="p">,</span> <span class="n">truncate_mode</span><span class="o">=</span><span class="s1">&#39;lastp&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">show_leaf_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_contracted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="mi">83</span><span class="p">,</span> <span class="n">truncate_mode</span><span class="o">=</span><span class="s1">&#39;lastp&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_leaf_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_contracted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dendrogram of Clusters&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bb6bc09245c8ee5eb4b34dc8cc015d5e6f70b813a9529d876e6581a6c5d67c42.png" src="_images/bb6bc09245c8ee5eb4b34dc8cc015d5e6f70b813a9529d876e6581a6c5d67c42.png" />
+<img alt="_images/9c3120badef299ab497cb1bbb8a4b2f466ad7dd790c6f5ce608ecad1b1728a0b.png" src="_images/9c3120badef299ab497cb1bbb8a4b2f466ad7dd790c6f5ce608ecad1b1728a0b.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">cluster</span>
-<span class="n">k4cls</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
-<span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;kmeans4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k4cls</span><span class="o">.</span><span class="n">labels_</span>
+<span class="n">k5cls</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k5cls</span><span class="o">.</span><span class="n">labels_</span>
 </pre></div>
 </div>
 </div>
@@ -470,34 +470,76 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;kmeans4&#39;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/174997a949bd56859fe6cd01f361135f804766e305b444c407f766d8ba8bcda2.png" src="_images/174997a949bd56859fe6cd01f361135f804766e305b444c407f766d8ba8bcda2.png" />
+<img alt="_images/cbc47fb401755082d68215abf7888e777d1ef97aa5ae30fc66b0b315de7641bd.png" src="_images/cbc47fb401755082d68215abf7888e777d1ef97aa5ae30fc66b0b315de7641bd.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;densidad&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans4&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;altitud&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;densidad&#39;}, xlabel=&#39;kmeans4&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;altitud&#39;}, xlabel=&#39;kmeans5&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/8a1bc29283fae5e831fa35e5588d395dfa7bd6da708b07ec2a7b69445b6e1494.png" src="_images/8a1bc29283fae5e831fa35e5588d395dfa7bd6da708b07ec2a7b69445b6e1494.png" />
+<img alt="_images/55612ba47ab21dd640151fc340d8a34bba07dde61ed986a18715812a89255571.png" src="_images/55612ba47ab21dd640151fc340d8a34bba07dde61ed986a18715812a89255571.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;humedad_relativa&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;humedad_relativa&#39;}, xlabel=&#39;kmeans5&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/8bedd234c775015f705c8c55d53dd566607ca812e38d7b19363470eccb8d766d.png" src="_images/8bedd234c775015f705c8c55d53dd566607ca812e38d7b19363470eccb8d766d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;urbanizacion&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;urbanizacion&#39;}, xlabel=&#39;kmeans5&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/5b4b6dfc11bb83d06ecd9b23f8e9857c842d334629cf3278a34e5f48fa0b23bf.png" src="_images/5b4b6dfc11bb83d06ecd9b23f8e9857c842d334629cf3278a34e5f48fa0b23bf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;densidad&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;densidad&#39;}, xlabel=&#39;kmeans5&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/e3a1336b757a3988a6cda35d159ac7f5136c94a26fd5ea266d9482310e92359e.png" src="_images/e3a1336b757a3988a6cda35d159ac7f5136c94a26fd5ea266d9482310e92359e.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pysal.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">weights</span>
 
-<span class="n">w_k4</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">KNN</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">w_k4</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">KNN</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -892,20 +934,20 @@ document.write(`
   centroids = gdf.centroid
 </pre></div>
 </div>
-<img alt="_images/1c0fc988e8be68304dfe2bedfeb68881f39e8029a6d20670f0d5ad5ce3d052c7.png" src="_images/1c0fc988e8be68304dfe2bedfeb68881f39e8029a6d20670f0d5ad5ce3d052c7.png" />
+<img alt="_images/f858f8671c237230dc5d08b08c920ab750e5b1de69dd7f527d4b76f6548a2e25.png" src="_images/f858f8671c237230dc5d08b08c920ab750e5b1de69dd7f527d4b76f6548a2e25.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
 
-<span class="n">cl_k4_wk4</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">w_k4</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
+<span class="n">cl_k4_wk4</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">w_k4</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">cat_std</span><span class="p">,</span> <span class="n">cl_k4_wk4</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2695634861781903
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.18005162287811383
 </pre></div>
 </div>
 </div>
@@ -913,13 +955,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_d30</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">DistanceBand</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="mi">30000</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">cl_d30</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">w_d30</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
+<span class="n">cl_d30</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">connectivity</span><span class="o">=</span><span class="n">w_d30</span><span class="o">.</span><span class="n">sparse</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cat_std</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">silhouette_score</span><span class="p">(</span><span class="n">cat_std</span><span class="p">,</span><span class="n">cl_d30</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3010860972076895
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.29149181735007734
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/scipy/sparse/_data.py:128: RuntimeWarning: divide by zero encountered in reciprocal
@@ -931,14 +973,14 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;knn5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cl_k4_wk4</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;knn5&#39;</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e777c75d87031a81ebeaa8840e9562b1988152c3576912a0b984a8059b9cf4a.png" src="_images/4e777c75d87031a81ebeaa8840e9562b1988152c3576912a0b984a8059b9cf4a.png" />
+<img alt="_images/4d499aff63f01b116bf9201e301a4962c30f8094777fddf571118921a6fbe000.png" src="_images/4d499aff63f01b116bf9201e301a4962c30f8094777fddf571118921a6fbe000.png" />
 </div>
 </div>
 </section>

@@ -403,6 +403,14 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libpysal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">esda</span><span class="w"> </span><span class="kn">import</span> <span class="n">Moran_Local</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistanceBand</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">esda</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">splot.esda</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_moran</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNN</span>
 </pre></div>
 </div>
 </div>
@@ -417,49 +425,47 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistanceBand</span>
-
-<span class="n">w_dist20km</span> <span class="o">=</span> <span class="n">DistanceBand</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="mi">20000</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_dist20km</span> <span class="o">=</span> <span class="n">DistanceBand</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="mi">20000</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">libpysal</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">Queen</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span> 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/scipy/sparse/_data.py:128: RuntimeWarning: divide by zero encountered in reciprocal
-  return self._with_data(data ** n)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/nq/kj34bm5140bgwbktdx1z94cm0000gn/T/ipykernel_1002/337824390.py:1: FutureWarning: `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
+  w = libpysal.weights.Queen.from_dataframe(gdf)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">esda</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">splot.esda</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_moran</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span> <span class="o">=</span> <span class="n">esda</span><span class="o">.</span><span class="n">Moran</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;humedad_relativa&quot;</span><span class="p">],</span> <span class="n">w_dist20km</span><span class="p">)</span>
-<span class="n">plot_moran</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span> <span class="o">=</span> <span class="n">esda</span><span class="o">.</span><span class="n">Moran</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">],</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">plot_moran</span><span class="p">(</span><span class="n">mi_q</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 1000x400 with 2 Axes&gt;,
- array([&lt;Axes: title={&#39;center&#39;: &#39;Reference Distribution&#39;}, xlabel=&#39;Moran I: 0.15&#39;, ylabel=&#39;Density&#39;&gt;,
-        &lt;Axes: title={&#39;center&#39;: &#39;Moran Scatterplot (0.15)&#39;}, xlabel=&#39;Attribute&#39;, ylabel=&#39;Spatial Lag&#39;&gt;],
+ array([&lt;Axes: title={&#39;center&#39;: &#39;Reference Distribution&#39;}, xlabel=&#39;Moran I: 0.14&#39;, ylabel=&#39;Density&#39;&gt;,
+        &lt;Axes: title={&#39;center&#39;: &#39;Moran Scatterplot (0.14)&#39;}, xlabel=&#39;Attribute&#39;, ylabel=&#39;Spatial Lag&#39;&gt;],
        dtype=object))
 </pre></div>
 </div>
-<img alt="_images/415a65d02a36bafc849cfdee29f392573779de66c9fe40bb3c97af34d4e4308c.png" src="_images/415a65d02a36bafc849cfdee29f392573779de66c9fe40bb3c97af34d4e4308c.png" />
+<img alt="_images/60b871c27b4d717faa91ad246a9d44624477f58e750a67a921c6e77105873599.png" src="_images/60b871c27b4d717faa91ad246a9d44624477f58e750a67a921c6e77105873599.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">splot.esda</span><span class="w"> </span><span class="kn">import</span> <span class="n">lisa_cluster</span>
 
-<span class="n">lisa</span> <span class="o">=</span> <span class="n">esda</span><span class="o">.</span><span class="n">Moran_Local</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;humedad_relativa&quot;</span><span class="p">],</span> <span class="n">w_dist20km</span><span class="p">)</span>
+<span class="n">lisa</span> <span class="o">=</span> <span class="n">esda</span><span class="o">.</span><span class="n">Moran_Local</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">],</span> <span class="n">w</span><span class="p">)</span>
 <span class="n">lisa_cluster</span><span class="p">(</span><span class="n">lisa</span><span class="p">,</span> <span class="n">gdf</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -468,7 +474,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;Figure size 640x480 with 1 Axes&gt;, &lt;Axes: &gt;)
 </pre></div>
 </div>
-<img alt="_images/b6cf12cfc3199f0d5e9e23951aaf8a1beacc2ced5e4b307f3db55e8f9eba2e21.png" src="_images/b6cf12cfc3199f0d5e9e23951aaf8a1beacc2ced5e4b307f3db55e8f9eba2e21.png" />
+<img alt="_images/cdc9baf405b4dc72aaba21d4fe8abbafc20a131992c7cf3d77590eb41a0e40a1.png" src="_images/cdc9baf405b4dc72aaba21d4fe8abbafc20a131992c7cf3d77590eb41a0e40a1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -525,7 +531,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/73e3008c0f589546e18756693d927530050f73efa36e1ae0ac774e7b26408053.png" src="_images/73e3008c0f589546e18756693d927530050f73efa36e1ae0ac774e7b26408053.png" />
+<img alt="_images/0d9496d1cb27d7dc3aba6df75c32301157794f7e322b6b1d7dbc00d0bffb467e.png" src="_images/0d9496d1cb27d7dc3aba6df75c32301157794f7e322b6b1d7dbc00d0bffb467e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -565,7 +571,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b0c294cb3362d9d630b96940520fbc35acc79a6cfa93080e0dcbc5a0f2025cc6.png" src="_images/b0c294cb3362d9d630b96940520fbc35acc79a6cfa93080e0dcbc5a0f2025cc6.png" />
+<img alt="_images/5d15d0c24bcfeb555aaef531e0dc095e03697248a81b5ab5193633b756fe8d8e.png" src="_images/5d15d0c24bcfeb555aaef531e0dc095e03697248a81b5ab5193633b756fe8d8e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -582,7 +588,7 @@ document.write(`
         &lt;Axes: &gt;, &lt;Axes: &gt;], dtype=object))
 </pre></div>
 </div>
-<img alt="_images/3947e79866b9c3b0377a06a4b0104f1bd7690417030328344b0d5427ee1d1593.png" src="_images/3947e79866b9c3b0377a06a4b0104f1bd7690417030328344b0d5427ee1d1593.png" />
+<img alt="_images/e4765ef80993decb37940449f3c5a790de2b2c43c0e1640d505b6c1c3a8198e1.png" src="_images/e4765ef80993decb37940449f3c5a790de2b2c43c0e1640d505b6c1c3a8198e1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -705,7 +711,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/16e50c2c25de79a91b20d1d4a6106ef99a99bc333390fe86539d6029adfcd0d5.png" src="_images/16e50c2c25de79a91b20d1d4a6106ef99a99bc333390fe86539d6029adfcd0d5.png" />
+<img alt="_images/7b9176a010c517834d18bf9aa2f8a23b609d61c02af922425e2a60074529b290.png" src="_images/7b9176a010c517834d18bf9aa2f8a23b609d61c02af922425e2a60074529b290.png" />
 </div>
 </div>
 </section>

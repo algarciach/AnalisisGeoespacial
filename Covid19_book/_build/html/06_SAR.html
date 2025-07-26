@@ -426,7 +426,7 @@ document.write(`
 <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;density_cfr&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">independent_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;densidad&#39;</span><span class="p">,</span> <span class="s1">&#39;altitud&#39;</span><span class="p">,</span> <span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad_relativa&#39;</span><span class="p">]</span>
+<span class="n">independent_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">independent_vars</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -451,9 +451,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/nq/kj34bm5140bgwbktdx1z94cm0000gn/T/ipykernel_1010/3943410554.py:11: FutureWarning: `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
+  w = Queen.from_dataframe(gdf)
+</pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  w = Queen.from_dataframe(gdf)
-REGRESSION RESULTS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
 ------------------
 
 SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
@@ -463,30 +466,45 @@ Weights matrix      :        None
 Dependent Variable  :log_density_cfr                Number of Observations:         125
 Mean dependent var  :      0.0146                Number of Variables   :           9
 S.D. dependent var  :      0.0161                Degrees of Freedom    :         116
-R-squared           :      0.2656
-Adjusted R-squared  :      0.2150
-Sum squared residual:   0.0237285                F-statistic           :      5.2449
-Sigma-square        :       0.000                Prob(F-statistic)     :   1.301e-05
-S.E. of regression  :       0.014                Log likelihood        :     358.220
-Sigma-square ML     :       0.000                Akaike info criterion :    -698.439
-S.E of regression ML:      0.0138                Schwarz criterion     :    -672.984
+R-squared           :      0.2402
+Adjusted R-squared  :      0.1878
+Sum squared residual:   0.0245561                F-statistic           :      4.5831
+Sigma-square        :       0.000                Prob(F-statistic)     :   7.092e-05
+S.E. of regression  :       0.015                Log likelihood        :     356.077
+Sigma-square ML     :       0.000                Akaike info criterion :    -694.154
+S.E of regression ML:      0.0140                Schwarz criterion     :    -668.699
 
 ------------------------------------------------------------------------------------
             Variable     Coefficient       Std.Error     t-Statistic     Probability
 ------------------------------------------------------------------------------------
-            CONSTANT         0.01507         0.00139        10.82174         0.00000
-            densidad         0.00433         0.00171         2.53201         0.01268
-             altitud         0.03940         0.01706         2.30955         0.02268
-         temperatura         0.03610         0.01604         2.25107         0.02627
-...
+            CONSTANT         0.01432         0.00138        10.41520         0.00000
+             altitud         0.00141         0.00262         0.53619         0.59285
+    humedad_relativa        -0.00292         0.00274        -1.06814         0.28767
+        urbanizacion         0.00149         0.00152         0.97704         0.33058
+            densidad         0.00461         0.00175         2.63177         0.00965
+           w_altitud         0.00028         0.00068         0.41150         0.68146
+  w_humedad_relativa         0.00013         0.00067         0.18849         0.85082
+      w_urbanizacion        -0.00021         0.00056        -0.37197         0.71059
+          w_densidad         0.00066         0.00066         1.00605         0.31648
+------------------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER           4.941
+
+TEST ON NORMALITY OF ERRORS
 TEST                             DF        VALUE           PROB
-Breusch-Pagan test                8         36.288           0.0000
-Koenker-Bassett test              8          5.243           0.7313
+Jarque-Bera                       2        585.692           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test                8         51.827           0.0000
+Koenker-Bassett test              8          8.988           0.3434
 ================================ END OF REPORT =====================================
 </pre></div>
 </div>
-<p><strong>Conclusiones</strong></p>
-<p>Este modelo OLS es el primero que muestra la densidad poblacional como un predictor estadísticamente significativo, junto con la altitud y la temperatura. La relación con la variable dependiente transformada (log_density_cfr) es positiva para estas tres variables, sugiriendo que a medida que aumentan la densidad, altitud y temperatura, también lo hace la densidad del logaritmo de la Tasa de Letalidad.</p>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_error_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Error_Het</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
@@ -508,20 +526,64 @@ Weights matrix      :queen_contiguity
 Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
 Mean dependent var  :      0.0146                Number of Variables   :           5
 S.D. dependent var  :      0.0161                Degrees of Freedom    :         120
-Pseudo R-squared    :      0.2378
+Pseudo R-squared    :      0.2302
 N. of iterations    :           1                Step1c computed       :          No
 
 ------------------------------------------------------------------------------------
             Variable     Coefficient       Std.Error     z-Statistic     Probability
 ------------------------------------------------------------------------------------
-            CONSTANT         0.01616         0.00200         8.07299         0.00000
-            densidad         0.00532         0.00178         2.99409         0.00275
-             altitud         0.02272         0.00911         2.49296         0.01267
-         temperatura         0.02020         0.00944         2.14022         0.03234
-    humedad_relativa        -0.00112         0.00115        -0.97549         0.32932
-              lambda         0.05863         0.02047         2.86342         0.00419
+            CONSTANT         0.01565         0.00177         8.82471         0.00000
+             altitud         0.00258         0.00097         2.67355         0.00751
+    humedad_relativa        -0.00256         0.00123        -2.08714         0.03688
+        urbanizacion         0.00182         0.00172         1.05482         0.29151
+            densidad         0.00533         0.00188         2.84104         0.00450
+              lambda         0.04634         0.02431         1.90648         0.05659
 ------------------------------------------------------------------------------------
 ================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sem</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">ML_Error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span> <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span> <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sem</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ML SPATIAL ERROR (METHOD = full)
+---------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           5
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         120
+Pseudo R-squared    :      0.1538
+Log likelihood      :    327.1198
+Sigma-square ML     :      0.0002                Akaike info criterion :    -644.240
+S.E of regression   :      0.0146                Schwarz criterion     :    -630.098
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.08315         0.04305         1.93139         0.05343
+             altitud        -0.00000         0.00000        -0.26676         0.78965
+    humedad_relativa        -0.00084         0.00053        -1.57753         0.11467
+        urbanizacion         0.00905         0.00708         1.27818         0.20119
+            densidad         0.00000         0.00000         2.28963         0.02204
+              lambda         0.24569         0.00326        75.40443         0.00000
+------------------------------------------------------------------------------------
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/spreg/ml_error.py:184: RuntimeWarning: Method &#39;bounded&#39; does not support relative tolerance in x; defaulting to absolute tolerance.
+  res = minimize_scalar(
+/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/spreg/ml_error.py:563: RuntimeWarning: invalid value encountered in log
+  jacob = np.log(np.linalg.det(a))
 </pre></div>
 </div>
 </div>
@@ -547,33 +609,33 @@ Weights matrix      :queen_contiguity
 Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
 Mean dependent var  :      0.0146                Number of Variables   :           6
 S.D. dependent var  :      0.0161                Degrees of Freedom    :         119
-Pseudo R-squared    :      0.2334
-Spatial Pseudo R-squared:  0.2270
+Pseudo R-squared    :      0.2027
+Spatial Pseudo R-squared:  0.1834
 
 ------------------------------------------------------------------------------------
             Variable     Coefficient       Std.Error     z-Statistic     Probability
 ------------------------------------------------------------------------------------
-            CONSTANT         0.01375         0.00428         3.21669         0.00130
-            densidad         0.00565         0.00158         3.57898         0.00034
-             altitud         0.01742         0.01075         1.61967         0.10530
-         temperatura         0.01522         0.01018         1.49605         0.13464
-    humedad_relativa        -0.00126         0.00146        -0.86226         0.38854
-W_log_density_cfr_rec         0.01152         0.05822         0.19786         0.84316
+            CONSTANT         0.01141         0.00421         2.71028         0.00672
+             altitud         0.00161         0.00187         0.86164         0.38889
+    humedad_relativa        -0.00199         0.00144        -1.38110         0.16725
+        urbanizacion         0.00162         0.00143         1.12993         0.25851
+            densidad         0.00490         0.00171         2.87026         0.00410
+W_log_density_cfr_rec         0.04493         0.05711         0.78681         0.43140
 ------------------------------------------------------------------------------------
 Instrumented: W_log_density_cfr_rec
-Instruments: W_altitud, W_densidad, W_humedad_relativa, W_temperatura
+Instruments: W_altitud, W_densidad, W_humedad_relativa, W_urbanizacion
 
 DIAGNOSTICS FOR SPATIAL DEPENDENCE
 TEST                              DF         VALUE           PROB
-Anselin-Kelejian Test             1          0.189           0.6641
+Anselin-Kelejian Test             1          0.008           0.9287
 
 SPATIAL LAG MODEL IMPACTS
 Impacts computed using the &#39;simple&#39; method.
             Variable         Direct        Indirect          Total
-            densidad         0.0056          0.0001          0.0057
-             altitud         0.0174          0.0002          0.0176
-         temperatura         0.0152          0.0002          0.0154
-    humedad_relativa        -0.0013         -0.0000         -0.0013
+             altitud         0.0016          0.0001          0.0017
+    humedad_relativa        -0.0020         -0.0001         -0.0021
+        urbanizacion         0.0016          0.0001          0.0017
+            densidad         0.0049          0.0002          0.0051
 ================================ END OF REPORT =====================================
 </pre></div>
 </div>

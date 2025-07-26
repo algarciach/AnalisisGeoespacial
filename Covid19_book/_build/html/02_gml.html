@@ -383,7 +383,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión Logística</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-de-poisson">Regresión de Poisson</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-binomial-negativa">Regresión Binomial Negativa</a></li>
@@ -427,7 +430,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;y_log&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">X_scaled</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
@@ -440,41 +443,41 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                  y_log   R-squared:                       0.199
-Model:                            OLS   Adj. R-squared:                  0.165
-Method:                 Least Squares   F-statistic:                     5.903
-Date:                Wed, 25 Jun 2025   Prob (F-statistic):           6.55e-05
-Time:                        00:16:58   Log-Likelihood:                -33.541
-No. Observations:                 125   AIC:                             79.08
-Df Residuals:                     119   BIC:                             96.05
-Df Model:                           5                                         
+Model:                            OLS   Adj. R-squared:                  0.159
+Method:                 Least Squares   F-statistic:                     4.899
+Date:                Fri, 25 Jul 2025   Prob (F-statistic):           0.000166
+Time:                        02:38:33   Log-Likelihood:                -33.475
+No. Observations:                 125   AIC:                             80.95
+Df Residuals:                     118   BIC:                             100.7
+Df Model:                           6                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
                  coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const          1.3239      0.029     45.639      0.000       1.266       1.381
-x1            -0.0195      0.036     -0.543      0.588      -0.091       0.052
-x2            -0.2757      0.213     -1.292      0.199      -0.698       0.147
-x3            -0.1397      0.212     -0.660      0.511      -0.559       0.280
-x4            -0.0461      0.034     -1.365      0.175      -0.113       0.021
-x5            -0.0492      0.030     -1.624      0.107      -0.109       0.011
+const          1.3240      0.029     45.473      0.000       1.266       1.382
+x1            -0.0201      0.036     -0.555      0.580      -0.092       0.052
+x2            -0.2719      0.214     -1.268      0.207      -0.697       0.153
+x3            -0.1359      0.213     -0.638      0.525      -0.558       0.286
+x4            -0.0455      0.034     -1.341      0.183      -0.113       0.022
+x5            -0.0099      0.032     -0.306      0.760      -0.074       0.054
+x6            -0.0452      0.033     -1.371      0.173      -0.111       0.020
 ==============================================================================
-Omnibus:                        1.859   Durbin-Watson:                   1.765
-Prob(Omnibus):                  0.395   Jarque-Bera (JB):                1.486
-Skew:                          -0.040   Prob(JB):                        0.476
-Kurtosis:                       3.528   Cond. No.                         16.0
+Omnibus:                        2.070   Durbin-Watson:                   1.760
+Prob(Omnibus):                  0.355   Jarque-Bera (JB):                1.736
+Skew:                          -0.059   Prob(JB):                        0.420
+Kurtosis:                       3.565   Cond. No.                         16.2
 ==============================================================================
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 </pre></div>
 </div>
-<p><strong>Conclusiones</strong><br />
-Este modelo de regresión gaussiano OLS es estadísticamente significativo en su conjunto, lo que significa que las variables independientes combinadas tienen un efecto sobre la variable dependiente. Sin embargo, el poder explicativo del modelo es bajo (R-squared), lo que sugiere que hay mucha variabilidad en la variable dependiente que no está siendo capturada por este conjunto de predictores.</p>
-<p>Lo más notable es que, ninguna de las variables independientes individuales (x1 a x5) es estadísticamente significativa. Esto implica que, aunque el modelo como un todo es “útil”, no se puede concluir con confianza que alguna de las variables incluidas individualmente tenga un impacto significativo en la variable dependiente.</p>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtener las predicciones</span>
@@ -497,7 +500,7 @@ Este modelo de regresión gaussiano OLS es estadísticamente significativo en su
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f12180beec6b00bbf9ceb55d7c1b1b61829d209d6eabf43124336e1ef08870cb.png" src="_images/f12180beec6b00bbf9ceb55d7c1b1b61829d209d6eabf43124336e1ef08870cb.png" />
+<img alt="_images/78a96704279e917dbbee573b40bc63b59d51171d2e1d2f09cf78e4cae1090343.png" src="_images/78a96704279e917dbbee573b40bc63b59d51171d2e1d2f09cf78e4cae1090343.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -523,9 +526,15 @@ Este modelo de regresión gaussiano OLS es estadísticamente significativo en su
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/67c350090e3b47a7b51cfd59e4127a9b09845935c6d3ef820a4b54298f247661.png" src="_images/67c350090e3b47a7b51cfd59e4127a9b09845935c6d3ef820a4b54298f247661.png" />
+<img alt="_images/712c1c64a7e60aa77ff16284c2f7f2e1cddcc494a1d873382ec4e937deba8b5a.png" src="_images/712c1c64a7e60aa77ff16284c2f7f2e1cddcc494a1d873382ec4e937deba8b5a.png" />
 </div>
 </div>
+<section id="conclusiones">
+<h3>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h3>
+<p>Aunque los residuos no muestran un patrón drásticamente incorrecto (como curvaturas o fanning claro), sí existen indicios de heterocedasticidad y posible dependencia espacial, especialmente:</p>
+<p>En variables con fuerte concentración de valores (densidad y urbanizacion).</p>
+<p>La posible influencia geográfica no explicada por OLS puede ser mejor capturada por modelos como SAR (estructura espacial global) o GWR (variabilidad espacial local).</p>
+</section>
 </section>
 <section id="regresion-logistica">
 <h2>Regresión Logística<a class="headerlink" href="#regresion-logistica" title="Link to this heading">#</a></h2>
@@ -540,7 +549,7 @@ Este modelo de regresión gaussiano OLS es estadísticamente significativo en su
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;evento_cfr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;evento_cfr&quot;</span><span class="p">]</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -552,31 +561,61 @@ Este modelo de regresión gaussiano OLS es estadísticamente significativo en su
 </pre></div>
 </div>
 </div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 0.573381
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.573067
          Iterations 10
                            Logit Regression Results                           
 ==============================================================================
 Dep. Variable:             evento_cfr   No. Observations:                  125
-Model:                          Logit   Df Residuals:                      119
-Method:                           MLE   Df Model:                            5
-Date:                Wed, 25 Jun 2025   Pseudo R-squ.:                  0.1697
-Time:                        00:52:59   Log-Likelihood:                -71.673
+Model:                          Logit   Df Residuals:                      118
+Method:                           MLE   Df Model:                            6
+Date:                Fri, 25 Jul 2025   Pseudo R-squ.:                  0.1701
+Time:                        02:52:06   Log-Likelihood:                -71.633
 converged:                       True   LL-Null:                       -86.319
-Covariance Type:            nonrobust   LLR p-value:                 2.031e-05
+Covariance Type:            nonrobust   LLR p-value:                 5.174e-05
 ==============================================================================
                  coef    std err          z      P&gt;|z|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const         -1.0279      0.703     -1.463      0.144      -2.405       0.349
-x1            -0.1267      0.247     -0.513      0.608      -0.611       0.357
-x2            -0.8821      1.516     -0.582      0.561      -3.853       2.089
-x3            -0.1838      1.501     -0.122      0.903      -3.127       2.759
-x4            -0.2996      0.236     -1.267      0.205      -0.763       0.164
-x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
+const         -0.9660      0.722     -1.337      0.181      -2.382       0.450
+x1            -0.1266      0.247     -0.513      0.608      -0.610       0.357
+x2            -0.8958      1.522     -0.589      0.556      -3.879       2.087
+x3            -0.1861      1.506     -0.124      0.902      -3.138       2.766
+x4            -0.2994      0.237     -1.266      0.206      -0.763       0.164
+x5            -0.0707      0.252     -0.280      0.779      -0.565       0.423
+x6            -4.6452      3.622     -1.283      0.200     -11.744       2.454
 ==============================================================================
 </pre></div>
 </div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.573067
+         Iterations 10
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:             evento_cfr   No. Observations:                  125
+Model:                          Logit   Df Residuals:                      118
+Method:                           MLE   Df Model:                            6
+Date:                Wed, 23 Jul 2025   Pseudo R-squ.:                  0.1701
+Time:                        02:29:03   Log-Likelihood:                -71.633
+converged:                       True   LL-Null:                       -86.319
+Covariance Type:            nonrobust   LLR p-value:                 5.174e-05
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.9660      0.722     -1.337      0.181      -2.382       0.450
+x1            -0.1266      0.247     -0.513      0.608      -0.610       0.357
+x2            -0.8958      1.522     -0.589      0.556      -3.879       2.087
+x3            -0.1861      1.506     -0.124      0.902      -3.138       2.766
+x4            -0.2994      0.237     -1.266      0.206      -0.763       0.164
+x5            -0.0707      0.252     -0.280      0.779      -0.565       0.423
+x6            -4.6452      3.622     -1.283      0.200     -11.744       2.454
+==============================================================================
+</pre></div>
+</div>
+<p><strong>Conclusiones</strong></p>
+<p>En resumen, aunque su modelo Logit es estadísticamente significativo en general, las variables independientes incluidas no demuestran un poder predictivo individual significativo sobre la probabilidad de evento_cfr. Es crucial investigar las posibles razones de esta discrepancia para mejorar la especificación de su modelo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -607,7 +646,7 @@ x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/40380e695164d80949506313985981c4572ece09d8a55e89f83646e7ad24d553.png" src="_images/40380e695164d80949506313985981c4572ece09d8a55e89f83646e7ad24d553.png" />
+<img alt="_images/a5f75081ad46485f94c61c51d9aeba95369077a5c5e656043edb56f7b99ac1ad.png" src="_images/a5f75081ad46485f94c61c51d9aeba95369077a5c5e656043edb56f7b99ac1ad.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -630,7 +669,7 @@ x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e87bdc5c1a933cf818b75c5051a6eb47cb2805db2775a70ef5d70c6bf7b51882.png" src="_images/e87bdc5c1a933cf818b75c5051a6eb47cb2805db2775a70ef5d70c6bf7b51882.png" />
+<img alt="_images/1ffa9c4ffc033a0e66766b618557980bdb6fa9f3664ffe39b280ecd6cdf92f5b.png" src="_images/1ffa9c4ffc033a0e66766b618557980bdb6fa9f3664ffe39b280ecd6cdf92f5b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -653,9 +692,14 @@ x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a8f3db35e2bb3b21f309932b427b9b804fc6b600dda7db4f40d11594f8cdad1b.png" src="_images/a8f3db35e2bb3b21f309932b427b9b804fc6b600dda7db4f40d11594f8cdad1b.png" />
+<img alt="_images/851a014e5811c3724518486bc4287f6a8132ca2b9e320d9dbe3055ac43c0e5ac.png" src="_images/851a014e5811c3724518486bc4287f6a8132ca2b9e320d9dbe3055ac43c0e5ac.png" />
 </div>
 </div>
+<p><strong>Conclusiones</strong></p>
+<p>En general, la mayoría de los gráficos de residuos para el modelo Logit muestran una dispersión aleatoria razonable, lo cual es un indicio de que los supuestos generales del modelo están siendo cumplidos.</p>
+<p>Sin embargo, el gráfico de Residuos vs temperatura sugiere que la relación entre temperatura y la probabilidad de evento_cfr podría no ser lineal. Considerar la inclusión de un término cuadrático para temperatura (temperatura2) o explorar una transformación diferente de temperatura podría mejorar el ajuste del modelo.</p>
+<p>El patrón en Residuos vs densidad es más peculiar y podría estar relacionado con la naturaleza de la variable densidad o cómo se comporta en relación con la variable binaria evento_cfr. No necesariamente indica un problema con el modelo, sino una característica de los datos o de cómo el modelo hace las predicciones para esa variable.</p>
+<p>Estos gráficos visuales complementan los resultados numéricos. Aunque el modelo Logit en su conjunto era significativo (según el LLR p-value), la falta de significancia individual de las variables y el patrón observado con temperatura sugieren que hay margen para mejorar la especificación del modelo para capturar mejor las relaciones subyacentes en sus datos.</p>
 </section>
 <section id="regresion-de-poisson">
 <h2>Regresión de Poisson<a class="headerlink" href="#regresion-de-poisson" title="Link to this heading">#</a></h2>
@@ -670,12 +714,8 @@ x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span>
-<span class="n">var</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;altitud&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;densidad&quot;</span><span class="p">,</span>
-<span class="p">]</span>  <span class="c1"># No area_municipio for GLM</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>  
+<span class="c1"># No area_municipio for GLM</span>
 <span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">])</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -687,33 +727,64 @@ x5            -5.0230      3.436     -1.462      0.144     -11.757       1.711
 </pre></div>
 </div>
 </div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
 ==============================================================================
 Dep. Variable:                    cfr   No. Observations:                  125
-Model:                            GLM   Df Residuals:                      120
-Model Family:                 Poisson   Df Model:                            4
+Model:                            GLM   Df Residuals:                      119
+Model Family:                 Poisson   Df Model:                            5
 Link Function:                    Log   Scale:                          1.0000
-Method:                          IRLS   Log-Likelihood:                -328.59
-Date:                Wed, 25 Jun 2025   Deviance:                       296.11
-Time:                        01:26:00   Pearson chi2:                     448.
-No. Iterations:                     6   Pseudo R-squ. (CS):             0.5448
+Method:                          IRLS   Log-Likelihood:                -328.61
+Date:                Fri, 25 Jul 2025   Deviance:                       296.14
+Time:                        02:59:55   Pearson chi2:                     448.
+No. Iterations:                     6   Pseudo R-squ. (CS):             0.5450
 Covariance Type:            nonrobust                                         
 ==============================================================================
                  coef    std err          z      P&gt;|z|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const         -4.9109      0.053    -92.889      0.000      -5.015      -4.807
-x1             1.2824      0.404      3.177      0.001       0.491       2.073
-x2             0.8846      0.396      2.232      0.026       0.108       1.661
-x3            -0.2210      0.049     -4.549      0.000      -0.316      -0.126
-x4             0.0983      0.077      1.275      0.202      -0.053       0.249
+const         -4.9109      0.053    -92.880      0.000      -5.015      -4.807
+x1             1.2899      0.408      3.162      0.002       0.490       2.089
+x2             0.8924      0.401      2.226      0.026       0.106       1.678
+x3            -0.2209      0.049     -4.546      0.000      -0.316      -0.126
+x4            -0.0076      0.061     -0.124      0.902      -0.128       0.113
+x5             0.1025      0.084      1.218      0.223      -0.062       0.267
 ==============================================================================
 </pre></div>
 </div>
-<p><strong>Conclusiones</strong><br />
-<strong>Altitud y Temperatura:</strong> Ambas variables están positiva y significativamente relacionadas con la Tasa de Letalidad. Esto podría sugerir que, en las condiciones evaluadas, las regiones con mayor altitud y temperaturas más elevadas tienden a presentar una mayor letalidad por COVID-19.</p>
-<p><strong>Humedad Relativa:</strong> Esta variable tiene un efecto protector, es decir, una mayor humedad relativa se asocia con una menor Tasa de Letalidad.</p>
-<p><strong>Densidad Poblacional:</strong> Contrario a lo que a menudo se podría esperar, la densidad poblacional no aparece como un predictor individual significativo de la letalidad en este modelo.</p>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                    cfr   No. Observations:                  125
+Model:                            GLM   Df Residuals:                      119
+Model Family:                 Poisson   Df Model:                            5
+Link Function:                    Log   Scale:                          1.0000
+Method:                          IRLS   Log-Likelihood:                -328.61
+Date:                Wed, 23 Jul 2025   Deviance:                       296.14
+Time:                        02:42:08   Pearson chi2:                     448.
+No. Iterations:                     6   Pseudo R-squ. (CS):             0.5450
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -4.9109      0.053    -92.880      0.000      -5.015      -4.807
+x1             1.2899      0.408      3.162      0.002       0.490       2.089
+x2             0.8924      0.401      2.226      0.026       0.106       1.678
+x3            -0.2209      0.049     -4.546      0.000      -0.316      -0.126
+x4            -0.0076      0.061     -0.124      0.902      -0.128       0.113
+x5             0.1025      0.084      1.218      0.223      -0.062       0.267
+==============================================================================
+</pre></div>
+</div>
+<p><strong>Conclusiones</strong></p>
+<p>Modelo Apropiado para Conteo: La elección de un modelo GLM con familia Poisson es adecuada si cfr es una variable de conteo.</p>
+<p>Buen Poder Explicativo: El Pseudo R-cuadrado de 0.5450 es mucho más alto que los de los modelos anteriores, lo que indica que este modelo GLM tiene un poder explicativo significativamente mayor para cfr.</p>
+<p>Variables Significativas: Las variables x1, x2 y x3 muestran un efecto estadísticamente significativo en la predicción del conteo esperado de cfr.</p>
+<p>x1 y x2 tienen efecto positivo y significativo sobre el CFR.</p>
+<p>x3 tiene efecto negativo fuerte y significativo.</p>
+<p>x4 y x5 no contribuyen significativamente (pueden eliminarse o transformarse).</p>
+<p>Variables No Significativas: x4 y x5 no parecen tener un efecto significativo.</p>
+<p>Presencia de Sobredispersión: La alta Pearson chi2 en relación con los grados de libertad sugiere que el modelo Poisson podría estar subestimando la variabilidad real en los datos. Esto es un punto crítico a abordar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get predictions</span>
@@ -745,7 +816,7 @@ x4             0.0983      0.077      1.275      0.202      -0.053       0.249
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8b44f1222fc3a548d4f69b8fd170ce0191469d329a75f94ba2983ab98dbea968.png" src="_images/8b44f1222fc3a548d4f69b8fd170ce0191469d329a75f94ba2983ab98dbea968.png" />
+<img alt="_images/338f4524e2f135af47cfa564fd17e755e43537f70527b8b177adb1783a4eb898.png" src="_images/338f4524e2f135af47cfa564fd17e755e43537f70527b8b177adb1783a4eb898.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -767,7 +838,7 @@ x4             0.0983      0.077      1.275      0.202      -0.053       0.249
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4ba3bb0f3b74ffad2ccc744b89961f9c9f30907fb03536034b06663b786c4f84.png" src="_images/4ba3bb0f3b74ffad2ccc744b89961f9c9f30907fb03536034b06663b786c4f84.png" />
+<img alt="_images/ef117518409dac4694523a45833b1da7a8112b80dad4dd9ea4ef702a4fe5d085.png" src="_images/ef117518409dac4694523a45833b1da7a8112b80dad4dd9ea4ef702a4fe5d085.png" />
 </div>
 </div>
 </section>
@@ -776,12 +847,8 @@ x4             0.0983      0.077      1.275      0.202      -0.053       0.249
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span>
-<span class="n">var</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;altitud&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;densidad&quot;</span><span class="p">,</span>
-<span class="p">]</span>  <span class="c1"># No area_municipio for GLM</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>  
+<span class="c1"># No area_municipio for GLM</span>
 <span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">])</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -793,26 +860,56 @@ x4             0.0983      0.077      1.275      0.202      -0.053       0.249
 </pre></div>
 </div>
 </div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
 ==============================================================================
 Dep. Variable:                    cfr   No. Observations:                  125
-Model:                            GLM   Df Residuals:                      120
-Model Family:        NegativeBinomial   Df Model:                            4
+Model:                            GLM   Df Residuals:                      119
+Model Family:        NegativeBinomial   Df Model:                            5
 Link Function:                    Log   Scale:                          1.0000
-Method:                          IRLS   Log-Likelihood:                -279.09
-Date:                Wed, 25 Jun 2025   Deviance:                       17.235
-Time:                        01:49:57   Pearson chi2:                     17.9
-No. Iterations:                     5   Pseudo R-squ. (CS):            0.03453
+Method:                          IRLS   Log-Likelihood:                -279.07
+Date:                Fri, 25 Jul 2025   Deviance:                       17.170
+Time:                        03:05:55   Pearson chi2:                     17.7
+No. Iterations:                     5   Pseudo R-squ. (CS):            0.03499
 Covariance Type:            nonrobust                                         
 ==============================================================================
                  coef    std err          z      P&gt;|z|      [0.025      0.975]
 ------------------------------------------------------------------------------
-const          1.0760      0.104     10.356      0.000       0.872       1.280
-x1            -0.4185      0.742     -0.564      0.573      -1.874       1.037
-x2            -0.2465      0.749     -0.329      0.742      -1.714       1.221
-x3            -0.0586      0.115     -0.509      0.611      -0.284       0.167
-x4            -0.0828      0.121     -0.682      0.495      -0.321       0.155
+const          1.0758      0.104     10.353      0.000       0.872       1.279
+x1            -0.4077      0.744     -0.548      0.584      -1.867       1.051
+x2            -0.2362      0.751     -0.315      0.753      -1.707       1.235
+x3            -0.0571      0.115     -0.495      0.620      -0.283       0.169
+x4            -0.0290      0.115     -0.252      0.801      -0.254       0.196
+x5            -0.0710      0.130     -0.545      0.586      -0.326       0.184
+==============================================================================
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/statsmodels/genmod/families/family.py:1367: ValueWarning: Negative binomial dispersion parameter alpha not set. Using default value alpha=1.0.
+  warnings.warn(&quot;Negative binomial dispersion parameter alpha not &quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                    cfr   No. Observations:                  125
+Model:                            GLM   Df Residuals:                      119
+Model Family:        NegativeBinomial   Df Model:                            5
+Link Function:                    Log   Scale:                          1.0000
+Method:                          IRLS   Log-Likelihood:                -279.07
+Date:                Wed, 23 Jul 2025   Deviance:                       17.170
+Time:                        02:53:53   Pearson chi2:                     17.7
+No. Iterations:                     5   Pseudo R-squ. (CS):            0.03499
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          1.0758      0.104     10.353      0.000       0.872       1.279
+x1            -0.4077      0.744     -0.548      0.584      -1.867       1.051
+x2            -0.2362      0.751     -0.315      0.753      -1.707       1.235
+x3            -0.0571      0.115     -0.495      0.620      -0.283       0.169
+x4            -0.0290      0.115     -0.252      0.801      -0.254       0.196
+x5            -0.0710      0.130     -0.545      0.586      -0.326       0.184
 ==============================================================================
 </pre></div>
 </div>
@@ -854,7 +951,7 @@ La principal conclusión de este modelo de Regresión Binomial Negativa es su ba
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/08176e303cfc1e69fac600e288551686b93c893bbcdc75c0f422c0ce987cdc8e.png" src="_images/08176e303cfc1e69fac600e288551686b93c893bbcdc75c0f422c0ce987cdc8e.png" />
+<img alt="_images/a64939e5e52ae903242805aad9d8a6a74e4f6f3459d994544671a144da305972.png" src="_images/a64939e5e52ae903242805aad9d8a6a74e4f6f3459d994544671a144da305972.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -878,7 +975,7 @@ La principal conclusión de este modelo de Regresión Binomial Negativa es su ba
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/30828ba49aadb6814f8e4220fcfba0fe741403c14419dd584544408d763d27db.png" src="_images/30828ba49aadb6814f8e4220fcfba0fe741403c14419dd584544408d763d27db.png" />
+<img alt="_images/b53228f3a0e64e52a09ba82b2ba8dcd9ed17522ff86e7e716e11b1c963fa633f.png" src="_images/b53228f3a0e64e52a09ba82b2ba8dcd9ed17522ff86e7e716e11b1c963fa633f.png" />
 </div>
 </div>
 </section>
@@ -894,12 +991,8 @@ La principal conclusión de este modelo de Regresión Binomial Negativa es su ba
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span>
-<span class="n">var</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;altitud&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;densidad&quot;</span><span class="p">,</span>
-<span class="p">]</span>  <span class="c1"># No area_municipio for ZIP</span>
+<span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>  
+<span class="c1"># No area_municipio for ZIP</span>
 <span class="n">exposure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">])</span>
 
 <span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
@@ -909,6 +1002,40 @@ La principal conclusión de este modelo de Regresión Binomial Negativa es su ba
 <span class="n">zip_model_offset</span> <span class="o">=</span> <span class="n">ZeroInflatedPoisson</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">exposure</span><span class="o">=</span><span class="n">exposure</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">zip_model_offset</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Current function value: 1.744450
+         Iterations: 35
+         Function evaluations: 37
+         Gradient evaluations: 37
+                     ZeroInflatedPoisson Regression Results                    
+===============================================================================
+Dep. Variable:                     cfr   No. Observations:                  125
+Model:             ZeroInflatedPoisson   Df Residuals:                      119
+Method:                            MLE   Df Model:                            5
+Date:                 Wed, 23 Jul 2025   Pseudo R-squ.:                 0.01311
+Time:                         04:57:48   Log-Likelihood:                -218.06
+converged:                       False   LL-Null:                       -220.95
+Covariance Type:             nonrobust   LLR p-value:                    0.3266
+=================================================================================
+                    coef    std err          z      P&gt;|z|      [0.025      0.975]
+---------------------------------------------------------------------------------
+inflate_const   -18.0946    759.870     -0.024      0.981   -1507.411    1471.222
+const            -0.6533      0.053    -12.359      0.000      -0.757      -0.550
+x1               -0.1380      0.365     -0.378      0.705      -0.854       0.578
+x2               -0.0627      0.369     -0.170      0.865      -0.785       0.660
+x3               -0.0778      0.054     -1.453      0.146      -0.183       0.027
+x4               -0.0088      0.058     -0.153      0.878      -0.122       0.104
+x5               -0.0255      0.082     -0.312      0.755      -0.186       0.135
+=================================================================================
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/scipy/optimize/_optimize.py:1313: OptimizeWarning: Maximum number of iterations has been exceeded.
+  res = _minimize_bfgs(f, x0, args, fprime, callback=callback, **opts)
+/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/statsmodels/base/model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
 </pre></div>
 </div>
 </div>
@@ -972,7 +1099,7 @@ Además, no se justifica la complejidad del modelo, ya que no resulta significat
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a37a46b00fa5ad5e171f64cb34a86e4fd8a9f5c51e21bfd212d0e00c9d49a2e1.png" src="_images/a37a46b00fa5ad5e171f64cb34a86e4fd8a9f5c51e21bfd212d0e00c9d49a2e1.png" />
+<img alt="_images/c4a9d7cf8a95b4e22f7b24382f1523655e7297e9310462bc0353f52fbe24b043.png" src="_images/c4a9d7cf8a95b4e22f7b24382f1523655e7297e9310462bc0353f52fbe24b043.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -994,7 +1121,7 @@ Además, no se justifica la complejidad del modelo, ya que no resulta significat
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/33a77c2ad0099d7752877e24b6ad5093aac8d8dbcef4a19e3a5cd022aa94e3db.png" src="_images/33a77c2ad0099d7752877e24b6ad5093aac8d8dbcef4a19e3a5cd022aa94e3db.png" />
+<img alt="_images/71c2a1c48798dd7de0705531eff5456737632dd5414c31dcf71e8e1d0cdb1d28.png" src="_images/71c2a1c48798dd7de0705531eff5456737632dd5414c31dcf71e8e1d0cdb1d28.png" />
 </div>
 </div>
 </section>
@@ -1064,7 +1191,10 @@ Además, no se justifica la complejidad del modelo, ya que no resulta significat
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión Logística</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-de-poisson">Regresión de Poisson</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-binomial-negativa">Regresión Binomial Negativa</a></li>
