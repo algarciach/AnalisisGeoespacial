@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos de Regresion Espacial SAR &#8212; Curso Analisis Geospacial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_SAR';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regresión Ponderada Geografica GWR" href="07_GWR.html" />
+    <link rel="prev" title="Cluster Espacial" href="05_spatial-cluster.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_geocovid19.png" class="logo__image only-light" alt="Curso Analisis Geospacial - Home"/>
+    <script>document.write(`<img src="_static/logo_geocovid19.png" class="logo__image only-dark" alt="Curso Analisis Geospacial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Curso Análisis Geoespacial - Edier V. Aristizabal G.
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_data.html">Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_point-pattern.html">Patron de Puntos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gml.html">Modelos Lineales Generalizados (GML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_geovisualization.html">Geovisualización</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_spatial-relationships.html">Autocorrelación Espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_spatial-cluster.html">Cluster Espacial</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelos de Regresion Espacial SAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_GWR.html">Regresión Ponderada Geografica GWR</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F06_SAR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06_SAR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos de Regresion Espacial SAR</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-endogena-con-la-variable-dependiente">Autocorrelación Endógena con la variable dependiente</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-de-regresion-espacial-sar">
+<h1>Modelos de Regresion Espacial SAR<a class="headerlink" href="#modelos-de-regresion-espacial-sar" title="Link to this heading">#</a></h1>
+<section id="autocorrelacion-endogena-con-la-variable-dependiente">
+<h2>Autocorrelación Endógena con la variable dependiente<a class="headerlink" href="#autocorrelacion-endogena-con-la-variable-dependiente" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libpysal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">spreg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">libpysal</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">libpysal.weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queen</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;libpysal&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/algarciach/AnalisisGeoespacial/raw/main/Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   urbanizacion         125 non-null    float64 
+ 10  densidad             125 non-null    float64 
+ 11  muertes_covid19      125 non-null    int64   
+ 12  recuperados_covid19  125 non-null    int64   
+ 13  cfr                  125 non-null    float64 
+ 14  geometry             125 non-null    geometry
+dtypes: float64(7), geometry(1), int64(3), object(4)
+memory usage: 14.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;density_cfr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;cfr&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;area_municipio&#39;</span><span class="p">])</span>
+<span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;density_cfr&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">independent_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">independent_vars</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">st</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">Queen</span><span class="o">.</span><span class="n">from_dataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+
+<span class="n">wx_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">independent_vars</span><span class="p">:</span>
+    <span class="n">wx_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;w_</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">libpysal</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">spatial_lag</span><span class="o">.</span><span class="n">lag_spatial</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">X_scaled_df</span><span class="p">[</span><span class="n">var</span><span class="p">])</span>
+
+<span class="n">wx_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">wx_dict</span><span class="p">)</span>
+<span class="n">slx_exog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X_scaled_df</span><span class="p">,</span> <span class="n">wx_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ols_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> 
+                      <span class="n">slx_exog</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr&#39;</span><span class="p">,</span> 
+                      <span class="n">name_x</span><span class="o">=</span><span class="n">slx_exog</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                      <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/nq/kj34bm5140bgwbktdx1z94cm0000gn/T/ipykernel_1010/1856113932.py:11: FutureWarning: `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
+  w = Queen.from_dataframe(gdf)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
+-----------------------------------------
+Data set            :     unknown
+Weights matrix      :        None
+Dependent Variable  :log_density_cfr                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :          11
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         114
+R-squared           :      0.2723
+Adjusted R-squared  :      0.2085
+Sum squared residual:    0.023518                F-statistic           :      4.2656
+Sigma-square        :       0.000                Prob(F-statistic)     :   4.707e-05
+S.E. of regression  :       0.014                Log likelihood        :     358.777
+Sigma-square ML     :       0.000                Akaike info criterion :    -695.553
+S.E of regression ML:      0.0137                Schwarz criterion     :    -664.442
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01504         0.00140        10.75680         0.00000
+             altitud         0.03957         0.01723         2.29662         0.02347
+         temperatura         0.03626         0.01619         2.24025         0.02701
+    humedad_relativa        -0.00084         0.00286        -0.29564         0.76804
+        urbanizacion         0.00136         0.00151         0.90349         0.36817
+            densidad         0.00411         0.00174         2.35734         0.02011
+           w_altitud        -0.00818         0.00484        -1.68961         0.09384
+       w_temperatura        -0.00805         0.00472        -1.70509         0.09090
+  w_humedad_relativa        -0.00035         0.00072        -0.48710         0.62712
+      w_urbanizacion        -0.00032         0.00056        -0.56459         0.57346
+          w_densidad         0.00094         0.00069         1.36916         0.17364
+------------------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+MULTICOLLINEARITY CONDITION NUMBER          53.574
+
+TEST ON NORMALITY OF ERRORS
+TEST                             DF        VALUE           PROB
+Jarque-Bera                       2        832.594           0.0000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY
+RANDOM COEFFICIENTS
+TEST                             DF        VALUE           PROB
+Breusch-Pagan test               10         47.994           0.0000
+Koenker-Bassett test             10          7.130           0.7131
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_error_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Error_Het</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
+                                         <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span>
+                                         <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span>
+                                         <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spatial_error_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: GM SPATIALLY WEIGHTED LEAST SQUARES (HET)
+------------------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           6
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         119
+Pseudo R-squared    :      0.2464
+N. of iterations    :           1                Step1c computed       :          No
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01605         0.00193         8.33170         0.00000
+             altitud         0.02175         0.00914         2.37910         0.01735
+         temperatura         0.01928         0.00945         2.04110         0.04124
+    humedad_relativa        -0.00127         0.00123        -1.03564         0.30037
+        urbanizacion         0.00166         0.00173         0.95863         0.33774
+            densidad         0.00478         0.00182         2.62630         0.00863
+              lambda         0.05693         0.02174         2.61928         0.00881
+------------------------------------------------------------------------------------
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sem</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">ML_Error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span> <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span> <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sem</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: ML SPATIAL ERROR (METHOD = full)
+---------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           6
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         119
+Pseudo R-squared    :      0.2458
+Log likelihood      :    358.0124
+Sigma-square ML     :      0.0002                Akaike info criterion :    -704.025
+S.E of regression   :      0.0137                Schwarz criterion     :    -687.055
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT        -0.13108         0.09551        -1.37239         0.16994
+             altitud         0.00003         0.00001         2.16836         0.03013
+         temperatura         0.00561         0.00289         1.94133         0.05222
+    humedad_relativa        -0.00026         0.00034        -0.74815         0.45437
+        urbanizacion         0.00879         0.00733         1.19882         0.23060
+            densidad         0.00000         0.00000         3.18338         0.00146
+              lambda         0.05508         0.02323         2.37076         0.01775
+------------------------------------------------------------------------------------
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/spreg/ml_error.py:184: RuntimeWarning: Method &#39;bounded&#39; does not support relative tolerance in x; defaulting to absolute tolerance.
+  res = minimize_scalar(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spatial_lag_model</span> <span class="o">=</span> <span class="n">spreg</span><span class="o">.</span><span class="n">GM_Lag</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X_scaled</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span>
+                                 <span class="n">name_y</span><span class="o">=</span><span class="s1">&#39;log_density_cfr_rec&#39;</span><span class="p">,</span>
+                                 <span class="n">name_x</span><span class="o">=</span><span class="n">independent_vars</span><span class="p">,</span>
+                                 <span class="n">name_w</span><span class="o">=</span><span class="s1">&#39;queen_contiguity&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spatial_lag_model</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>REGRESSION RESULTS
+------------------
+
+SUMMARY OF OUTPUT: SPATIAL TWO STAGE LEAST SQUARES
+--------------------------------------------------
+Data set            :     unknown
+Weights matrix      :queen_contiguity
+Dependent Variable  :log_density_cfr_rec                Number of Observations:         125
+Mean dependent var  :      0.0146                Number of Variables   :           7
+S.D. dependent var  :      0.0161                Degrees of Freedom    :         118
+Pseudo R-squared    :      0.2489
+Spatial Pseudo R-squared:  0.2504
+
+------------------------------------------------------------------------------------
+            Variable     Coefficient       Std.Error     z-Statistic     Probability
+------------------------------------------------------------------------------------
+            CONSTANT         0.01473         0.00419         3.51910         0.00043
+             altitud         0.01809         0.01059         1.70716         0.08779
+         temperatura         0.01562         0.01004         1.55585         0.11974
+    humedad_relativa        -0.00142         0.00144        -0.97976         0.32720
+        urbanizacion         0.00162         0.00139         1.16594         0.24364
+            densidad         0.00521         0.00162         3.20736         0.00134
+W_log_density_cfr_rec        -0.00244         0.05695        -0.04284         0.96583
+------------------------------------------------------------------------------------
+Instrumented: W_log_density_cfr_rec
+Instruments: W_altitud, W_densidad, W_humedad_relativa, W_temperatura,
+             W_urbanizacion
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+TEST                              DF         VALUE           PROB
+Anselin-Kelejian Test             1          0.432           0.5110
+
+SPATIAL LAG MODEL IMPACTS
+Impacts computed using the &#39;simple&#39; method.
+            Variable         Direct        Indirect          Total
+             altitud         0.0181         -0.0000          0.0180
+         temperatura         0.0156         -0.0000          0.0156
+    humedad_relativa        -0.0014          0.0000         -0.0014
+        urbanizacion         0.0016         -0.0000          0.0016
+            densidad         0.0052         -0.0000          0.0052
+================================ END OF REPORT =====================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_spatial-cluster.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Cluster Espacial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_GWR.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regresión Ponderada Geografica GWR</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-endogena-con-la-variable-dependiente">Autocorrelación Endógena con la variable dependiente</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alvin Garcia Chaves
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Licensed under CC BY 4.0.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
