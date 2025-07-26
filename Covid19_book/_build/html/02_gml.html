@@ -383,10 +383,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión Logística</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-de-poisson">Regresión de Poisson</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-binomial-negativa">Regresión Binomial Negativa</a></li>
@@ -449,8 +446,8 @@ document.write(`
 Dep. Variable:                  y_log   R-squared:                       0.199
 Model:                            OLS   Adj. R-squared:                  0.159
 Method:                 Least Squares   F-statistic:                     4.899
-Date:                Fri, 25 Jul 2025   Prob (F-statistic):           0.000166
-Time:                        02:38:33   Log-Likelihood:                -33.475
+Date:                Sat, 26 Jul 2025   Prob (F-statistic):           0.000166
+Time:                        01:02:40   Log-Likelihood:                -33.475
 No. Observations:                 125   AIC:                             80.95
 Df Residuals:                     118   BIC:                             100.7
 Df Model:                           6                                         
@@ -529,12 +526,6 @@ Notes:
 <img alt="_images/712c1c64a7e60aa77ff16284c2f7f2e1cddcc494a1d873382ec4e937deba8b5a.png" src="_images/712c1c64a7e60aa77ff16284c2f7f2e1cddcc494a1d873382ec4e937deba8b5a.png" />
 </div>
 </div>
-<section id="conclusiones">
-<h3>Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h3>
-<p>Aunque los residuos no muestran un patrón drásticamente incorrecto (como curvaturas o fanning claro), sí existen indicios de heterocedasticidad y posible dependencia espacial, especialmente:</p>
-<p>En variables con fuerte concentración de valores (densidad y urbanizacion).</p>
-<p>La posible influencia geográfica no explicada por OLS puede ser mejor capturada por modelos como SAR (estructura espacial global) o GWR (variabilidad espacial local).</p>
-</section>
 </section>
 <section id="regresion-logistica">
 <h2>Regresión Logística<a class="headerlink" href="#regresion-logistica" title="Link to this heading">#</a></h2>
@@ -570,8 +561,8 @@ Notes:
 Dep. Variable:             evento_cfr   No. Observations:                  125
 Model:                          Logit   Df Residuals:                      118
 Method:                           MLE   Df Model:                            6
-Date:                Fri, 25 Jul 2025   Pseudo R-squ.:                  0.1701
-Time:                        02:52:06   Log-Likelihood:                -71.633
+Date:                Sat, 26 Jul 2025   Pseudo R-squ.:                  0.1701
+Time:                        01:03:16   Log-Likelihood:                -71.633
 converged:                       True   LL-Null:                       -86.319
 Covariance Type:            nonrobust   LLR p-value:                 5.174e-05
 ==============================================================================
@@ -589,33 +580,6 @@ x6            -4.6452      3.622     -1.283      0.200     -11.744       2.454
 </div>
 </div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 0.573067
-         Iterations 10
-                           Logit Regression Results                           
-==============================================================================
-Dep. Variable:             evento_cfr   No. Observations:                  125
-Model:                          Logit   Df Residuals:                      118
-Method:                           MLE   Df Model:                            6
-Date:                Wed, 23 Jul 2025   Pseudo R-squ.:                  0.1701
-Time:                        02:29:03   Log-Likelihood:                -71.633
-converged:                       True   LL-Null:                       -86.319
-Covariance Type:            nonrobust   LLR p-value:                 5.174e-05
-==============================================================================
-                 coef    std err          z      P&gt;|z|      [0.025      0.975]
-------------------------------------------------------------------------------
-const         -0.9660      0.722     -1.337      0.181      -2.382       0.450
-x1            -0.1266      0.247     -0.513      0.608      -0.610       0.357
-x2            -0.8958      1.522     -0.589      0.556      -3.879       2.087
-x3            -0.1861      1.506     -0.124      0.902      -3.138       2.766
-x4            -0.2994      0.237     -1.266      0.206      -0.763       0.164
-x5            -0.0707      0.252     -0.280      0.779      -0.565       0.423
-x6            -4.6452      3.622     -1.283      0.200     -11.744       2.454
-==============================================================================
-</pre></div>
-</div>
-<p><strong>Conclusiones</strong></p>
-<p>En resumen, aunque su modelo Logit es estadísticamente significativo en general, las variables independientes incluidas no demuestran un poder predictivo individual significativo sobre la probabilidad de evento_cfr. Es crucial investigar las posibles razones de esta discrepancia para mejorar la especificación de su modelo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -695,11 +659,6 @@ x6            -4.6452      3.622     -1.283      0.200     -11.744       2.454
 <img alt="_images/851a014e5811c3724518486bc4287f6a8132ca2b9e320d9dbe3055ac43c0e5ac.png" src="_images/851a014e5811c3724518486bc4287f6a8132ca2b9e320d9dbe3055ac43c0e5ac.png" />
 </div>
 </div>
-<p><strong>Conclusiones</strong></p>
-<p>En general, la mayoría de los gráficos de residuos para el modelo Logit muestran una dispersión aleatoria razonable, lo cual es un indicio de que los supuestos generales del modelo están siendo cumplidos.</p>
-<p>Sin embargo, el gráfico de Residuos vs temperatura sugiere que la relación entre temperatura y la probabilidad de evento_cfr podría no ser lineal. Considerar la inclusión de un término cuadrático para temperatura (temperatura2) o explorar una transformación diferente de temperatura podría mejorar el ajuste del modelo.</p>
-<p>El patrón en Residuos vs densidad es más peculiar y podría estar relacionado con la naturaleza de la variable densidad o cómo se comporta en relación con la variable binaria evento_cfr. No necesariamente indica un problema con el modelo, sino una característica de los datos o de cómo el modelo hace las predicciones para esa variable.</p>
-<p>Estos gráficos visuales complementan los resultados numéricos. Aunque el modelo Logit en su conjunto era significativo (según el LLR p-value), la falta de significancia individual de las variables y el patrón observado con temperatura sugieren que hay margen para mejorar la especificación del modelo para capturar mejor las relaciones subyacentes en sus datos.</p>
 </section>
 <section id="regresion-de-poisson">
 <h2>Regresión de Poisson<a class="headerlink" href="#regresion-de-poisson" title="Link to this heading">#</a></h2>
@@ -735,8 +694,8 @@ Model:                            GLM   Df Residuals:                      119
 Model Family:                 Poisson   Df Model:                            5
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -328.61
-Date:                Fri, 25 Jul 2025   Deviance:                       296.14
-Time:                        02:59:55   Pearson chi2:                     448.
+Date:                Sat, 26 Jul 2025   Deviance:                       296.14
+Time:                        01:04:28   Pearson chi2:                     448.
 No. Iterations:                     6   Pseudo R-squ. (CS):             0.5450
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -753,38 +712,6 @@ x5             0.1025      0.084      1.218      0.223      -0.062       0.267
 </div>
 </div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
-==============================================================================
-Dep. Variable:                    cfr   No. Observations:                  125
-Model:                            GLM   Df Residuals:                      119
-Model Family:                 Poisson   Df Model:                            5
-Link Function:                    Log   Scale:                          1.0000
-Method:                          IRLS   Log-Likelihood:                -328.61
-Date:                Wed, 23 Jul 2025   Deviance:                       296.14
-Time:                        02:42:08   Pearson chi2:                     448.
-No. Iterations:                     6   Pseudo R-squ. (CS):             0.5450
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          z      P&gt;|z|      [0.025      0.975]
-------------------------------------------------------------------------------
-const         -4.9109      0.053    -92.880      0.000      -5.015      -4.807
-x1             1.2899      0.408      3.162      0.002       0.490       2.089
-x2             0.8924      0.401      2.226      0.026       0.106       1.678
-x3            -0.2209      0.049     -4.546      0.000      -0.316      -0.126
-x4            -0.0076      0.061     -0.124      0.902      -0.128       0.113
-x5             0.1025      0.084      1.218      0.223      -0.062       0.267
-==============================================================================
-</pre></div>
-</div>
-<p><strong>Conclusiones</strong></p>
-<p>Modelo Apropiado para Conteo: La elección de un modelo GLM con familia Poisson es adecuada si cfr es una variable de conteo.</p>
-<p>Buen Poder Explicativo: El Pseudo R-cuadrado de 0.5450 es mucho más alto que los de los modelos anteriores, lo que indica que este modelo GLM tiene un poder explicativo significativamente mayor para cfr.</p>
-<p>Variables Significativas: Las variables x1, x2 y x3 muestran un efecto estadísticamente significativo en la predicción del conteo esperado de cfr.</p>
-<p>x1 y x2 tienen efecto positivo y significativo sobre el CFR.</p>
-<p>x3 tiene efecto negativo fuerte y significativo.</p>
-<p>x4 y x5 no contribuyen significativamente (pueden eliminarse o transformarse).</p>
-<p>Variables No Significativas: x4 y x5 no parecen tener un efecto significativo.</p>
-<p>Presencia de Sobredispersión: La alta Pearson chi2 en relación con los grados de libertad sugiere que el modelo Poisson podría estar subestimando la variabilidad real en los datos. Esto es un punto crítico a abordar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get predictions</span>
@@ -868,8 +795,8 @@ Model:                            GLM   Df Residuals:                      119
 Model Family:        NegativeBinomial   Df Model:                            5
 Link Function:                    Log   Scale:                          1.0000
 Method:                          IRLS   Log-Likelihood:                -279.07
-Date:                Fri, 25 Jul 2025   Deviance:                       17.170
-Time:                        03:05:55   Pearson chi2:                     17.7
+Date:                Sat, 26 Jul 2025   Deviance:                       17.170
+Time:                        01:05:54   Pearson chi2:                     17.7
 No. Iterations:                     5   Pseudo R-squ. (CS):            0.03499
 Covariance Type:            nonrobust                                         
 ==============================================================================
@@ -890,33 +817,6 @@ x5            -0.0710      0.130     -0.545      0.586      -0.326       0.184
 </div>
 </div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 Generalized Linear Model Regression Results                  
-==============================================================================
-Dep. Variable:                    cfr   No. Observations:                  125
-Model:                            GLM   Df Residuals:                      119
-Model Family:        NegativeBinomial   Df Model:                            5
-Link Function:                    Log   Scale:                          1.0000
-Method:                          IRLS   Log-Likelihood:                -279.07
-Date:                Wed, 23 Jul 2025   Deviance:                       17.170
-Time:                        02:53:53   Pearson chi2:                     17.7
-No. Iterations:                     5   Pseudo R-squ. (CS):            0.03499
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          z      P&gt;|z|      [0.025      0.975]
-------------------------------------------------------------------------------
-const          1.0758      0.104     10.353      0.000       0.872       1.279
-x1            -0.4077      0.744     -0.548      0.584      -1.867       1.051
-x2            -0.2362      0.751     -0.315      0.753      -1.707       1.235
-x3            -0.0571      0.115     -0.495      0.620      -0.283       0.169
-x4            -0.0290      0.115     -0.252      0.801      -0.254       0.196
-x5            -0.0710      0.130     -0.545      0.586      -0.326       0.184
-==============================================================================
-</pre></div>
-</div>
-<p><strong>Conclusiones</strong><br />
-La principal conclusión de este modelo de Regresión Binomial Negativa es su bajo poder predictivo (Pseudo R-cuadrado ~0.03). Esto significa que las variables altitud, temperatura, humedad_relativa y densidad explican muy poco de la variabilidad en la Tasa de Letalidad cuando se asume una distribución Binomial Negativa.</p>
-<p>A diferencia del modelo de Poisson anterior, ninguna de las variables predictoras  resultó ser estadísticamente significativa.</p>
-<p>Aunque el modelo de Regresión Binomial Negativa puede ser teóricamente más apropiado si hay sobredispersion, los resultados prácticos de este ajuste sugieren que es un modelo mucho menos explicativo y menos útil para identificar los factores que influyen en la Tasa de Letalidad de COVID-19</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get predictions for Negative Binomial model with offset</span>
@@ -1015,8 +915,8 @@ La principal conclusión de este modelo de Regresión Binomial Negativa es su ba
 Dep. Variable:                     cfr   No. Observations:                  125
 Model:             ZeroInflatedPoisson   Df Residuals:                      119
 Method:                            MLE   Df Model:                            5
-Date:                 Wed, 23 Jul 2025   Pseudo R-squ.:                 0.01311
-Time:                         04:57:48   Log-Likelihood:                -218.06
+Date:                 Sat, 26 Jul 2025   Pseudo R-squ.:                 0.01311
+Time:                         01:07:25   Log-Likelihood:                -218.06
 converged:                       False   LL-Null:                       -220.95
 Covariance Type:             nonrobust   LLR p-value:                    0.3266
 =================================================================================
@@ -1040,35 +940,6 @@ x5               -0.0255      0.082     -0.312      0.755      -0.186       0.13
 </div>
 </div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
-         Current function value: 1.744501
-         Iterations: 29
-         Function evaluations: 32
-         Gradient evaluations: 32
-                     ZeroInflatedPoisson Regression Results                    
-===============================================================================
-Dep. Variable:                     cfr   No. Observations:                  125
-Model:             ZeroInflatedPoisson   Df Residuals:                      120
-Method:                            MLE   Df Model:                            4
-Date:                 Wed, 25 Jun 2025   Pseudo R-squ.:                 0.01305
-Time:                         02:06:25   Log-Likelihood:                -218.06
-converged:                        True   LL-Null:                       -220.95
-Covariance Type:             nonrobust   LLR p-value:                    0.2172
-=================================================================================
-                    coef    std err          z      P&gt;|z|      [0.025      0.975]
----------------------------------------------------------------------------------
-inflate_const   -16.6002    359.947     -0.046      0.963    -722.084     688.884
-const            -0.6533      0.053    -12.359      0.000      -0.757      -0.550
-x1               -0.1423      0.364     -0.391      0.696      -0.856       0.571
-x2               -0.0672      0.367     -0.183      0.855      -0.787       0.653
-x3               -0.0783      0.053     -1.465      0.143      -0.183       0.026
-x4               -0.0299      0.077     -0.389      0.697      -0.181       0.121
-=================================================================================
-</pre></div>
-</div>
-<p><strong>Conclusiones</strong></p>
-<p>Este modelo de Regresión de Ceros Inflados de Poisson no es adecuado para explicar la Tasa de Letalidad por COVID-19 en este conjunto de datos. Su poder explicativo es extremadamente bajo, y ninguna de las variables predictoras principales muestra una relación estadísticamente significativa con la CFR.
-Además, no se justifica la complejidad del modelo, ya que no resulta significativa.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get predictions for Zero-Inflated Poisson model with offset</span>
@@ -1191,10 +1062,7 @@ Además, no se justifica la complejidad del modelo, ya que no resulta significat
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-lineal-gaussiana">Regresión Lineal Gaussiana</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-logistica">Regresión Logística</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-de-poisson">Regresión de Poisson</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-binomial-negativa">Regresión Binomial Negativa</a></li>

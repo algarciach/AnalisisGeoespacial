@@ -422,7 +422,7 @@ document.write(`
 <h2>Agrupamiento Espacial (Regionalización)<a class="headerlink" href="#agrupamiento-espacial-regionalizacion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -455,7 +455,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9c3120badef299ab497cb1bbb8a4b2f466ad7dd790c6f5ce608ecad1b1728a0b.png" src="_images/9c3120badef299ab497cb1bbb8a4b2f466ad7dd790c6f5ce608ecad1b1728a0b.png" />
+<img alt="_images/31e4f8b4f8aa609e77e4b393ababdebeff02f4af81fb7b05b08ab30ac46b65bf.png" src="_images/31e4f8b4f8aa609e77e4b393ababdebeff02f4af81fb7b05b08ab30ac46b65bf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -476,7 +476,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cbc47fb401755082d68215abf7888e777d1ef97aa5ae30fc66b0b315de7641bd.png" src="_images/cbc47fb401755082d68215abf7888e777d1ef97aa5ae30fc66b0b315de7641bd.png" />
+<img alt="_images/70b90a60de1e382dd0f7a9ac5850e1a54747283b344c83cc89dbbce5fe9ca703.png" src="_images/70b90a60de1e382dd0f7a9ac5850e1a54747283b344c83cc89dbbce5fe9ca703.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -490,7 +490,21 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;altitud&#39;}, xlabel=&#39;kmeans5&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/55612ba47ab21dd640151fc340d8a34bba07dde61ed986a18715812a89255571.png" src="_images/55612ba47ab21dd640151fc340d8a34bba07dde61ed986a18715812a89255571.png" />
+<img alt="_images/3c017226484be94b0fac602739b2facc0dd028388ba1e358bce1c5ad0d3f20a6.png" src="_images/3c017226484be94b0fac602739b2facc0dd028388ba1e358bce1c5ad0d3f20a6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;kmeans5&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;temperatura&#39;}, xlabel=&#39;kmeans5&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/1fdf48039c4431329e4e9edc5c3549fff6b7cb67c9e285e01ab2fabfe2467c6c.png" src="_images/1fdf48039c4431329e4e9edc5c3549fff6b7cb67c9e285e01ab2fabfe2467c6c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -504,7 +518,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;humedad_relativa&#39;}, xlabel=&#39;kmeans5&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/8bedd234c775015f705c8c55d53dd566607ca812e38d7b19363470eccb8d766d.png" src="_images/8bedd234c775015f705c8c55d53dd566607ca812e38d7b19363470eccb8d766d.png" />
+<img alt="_images/6512476588167e04d8e82680ac945077911c96fd06aa55c74771f2e92a8b1695.png" src="_images/6512476588167e04d8e82680ac945077911c96fd06aa55c74771f2e92a8b1695.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -518,7 +532,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;urbanizacion&#39;}, xlabel=&#39;kmeans5&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5b4b6dfc11bb83d06ecd9b23f8e9857c842d334629cf3278a34e5f48fa0b23bf.png" src="_images/5b4b6dfc11bb83d06ecd9b23f8e9857c842d334629cf3278a34e5f48fa0b23bf.png" />
+<img alt="_images/58dac88fe3ff96b2a919705dacee07d32011c769cde92a669b18862bc633bd12.png" src="_images/58dac88fe3ff96b2a919705dacee07d32011c769cde92a669b18862bc633bd12.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -532,7 +546,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;densidad&#39;}, xlabel=&#39;kmeans5&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/e3a1336b757a3988a6cda35d159ac7f5136c94a26fd5ea266d9482310e92359e.png" src="_images/e3a1336b757a3988a6cda35d159ac7f5136c94a26fd5ea266d9482310e92359e.png" />
+<img alt="_images/95c113cca6451e7d52ec4b270e2b8848f28a70627b79b0dd587260656b5ae273.png" src="_images/95c113cca6451e7d52ec4b270e2b8848f28a70627b79b0dd587260656b5ae273.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -947,7 +961,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.18005162287811383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.16510355129590978
 </pre></div>
 </div>
 </div>
@@ -961,7 +975,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.29149181735007734
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2917484846601373
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/Caskroom/miniforge/base/envs/geo/lib/python3.11/site-packages/scipy/sparse/_data.py:128: RuntimeWarning: divide by zero encountered in reciprocal
@@ -980,7 +994,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4d499aff63f01b116bf9201e301a4962c30f8094777fddf571118921a6fbe000.png" src="_images/4d499aff63f01b116bf9201e301a4962c30f8094777fddf571118921a6fbe000.png" />
+<img alt="_images/b93517df23e972014d334030090a1fddfab914d2dd450dd6d25f11cc61f8d1b2.png" src="_images/b93517df23e972014d334030090a1fddfab914d2dd450dd6d25f11cc61f8d1b2.png" />
 </div>
 </div>
 </section>
