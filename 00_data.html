@@ -1,0 +1,2775 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Datos &#8212; Curso Analisis Geospacial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '00_data';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Patron de Puntos" href="01_point-pattern.html" />
+    <link rel="prev" title="Curso Análisis Geoespacial - Edier V. Aristizabal G." href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_geocovid19.png" class="logo__image only-light" alt="Curso Analisis Geospacial - Home"/>
+    <script>document.write(`<img src="_static/logo_geocovid19.png" class="logo__image only-dark" alt="Curso Analisis Geospacial - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Curso Análisis Geoespacial - Edier V. Aristizabal G.
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Datos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_point-pattern.html">Patron de Puntos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gml.html">Modelos Lineales Generalizados (GML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_geovisualization.html">Geovisualización</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_spatial-relationships.html">Autocorrelación Espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_spatial-cluster.html">Cluster Espacial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_SAR.html">Modelos de Regresion Espacial SAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_GWR.html">Regresión Ponderada Geografica GWR</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F00_data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/00_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-variables">Definición de Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catalogo-de-variables">Catálogo de Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-datos">Fuente de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">Preprocesamiento de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dem">DEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-relative-humity">Temperature &amp; Relative Humity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-demograficos">Datos Demográficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-covid19">Datos Covid19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-geograficos">Datos Geográficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unir-datos-demograficos-y-covid19-con-geograficos">Unir datos Demográficos y Covid19 con Geográficos</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="datos">
+<h1>Datos<a class="headerlink" href="#datos" title="Link to this heading">#</a></h1>
+<section id="definicion-de-variables">
+<h2>Definición de Variables<a class="headerlink" href="#definicion-de-variables" title="Link to this heading">#</a></h2>
+<p>Las variables predictoras consideradas para este estudio son:</p>
+<ul class="simple">
+<li><p>Área del municipio</p></li>
+<li><p>Población total</p></li>
+<li><p>Densidad poblacional</p></li>
+<li><p>Humedad relativa media anual</p></li>
+<li><p>Temperatura media anual</p></li>
+<li><p>Altitud media</p></li>
+</ul>
+<p>La variable objetivo es continua y corresponde a la <em>Tasa o Razón de Letalidad</em> (CFR, por sus siglas en inglés Case Fatality Rate), como indicador de la mortalidad causada por el COVID-19. Este índice se calcula como el número de muertes conocidas dividido entre el número total de casos confirmados, expresado en porcentaje (Chaparro_2021).</p>
+<div class="math notranslate nohighlight">
+\[CFR = \dfrac{\text{No. de muertes por la enfermedad}}{\text{No. de muertes por la enfermedad + No. de casos recuperados de la enfermedad}} \times 100\]</div>
+<p>Para este estudio, se considerará que ocurre un evento cuando el <em>CFR</em> supere el umbral del 3%. Por lo tanto, un evento se registra si CFR &gt; 3.</p>
+</section>
+<section id="catalogo-de-variables">
+<h2>Catálogo de Variables<a class="headerlink" href="#catalogo-de-variables" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Nombre</p></th>
+<th class="head text-left"><p>Definición</p></th>
+<th class="head text-center"><p>Tipo de dato</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>codigo_municipio</p></td>
+<td class="text-left"><p>Código DANE del Municipio</p></td>
+<td class="text-center"><p>String</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>nombre_municipio</p></td>
+<td class="text-left"><p>Nombre del Municipio</p></td>
+<td class="text-center"><p>String</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>codigo_subregion</p></td>
+<td class="text-left"><p>Código administrativo para las subregiones del Departamento</p></td>
+<td class="text-center"><p>String</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>nombre_subregion</p></td>
+<td class="text-left"><p>Nombre de la Subregion</p></td>
+<td class="text-center"><p>String</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>area_municipio</p></td>
+<td class="text-left"><p>Area del Municipio</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>altitud</p></td>
+<td class="text-left"><p>Altitud promedio</p></td>
+<td class="text-center"><p>Int64</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>temperatura</p></td>
+<td class="text-left"><p>Temperatura promedio anual</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>humedad_relativa</p></td>
+<td class="text-left"><p>Humedad Relativa promedio anual</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>poblacion</p></td>
+<td class="text-left"><p>Total de habitantes</p></td>
+<td class="text-center"><p>Int64</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>densidad</p></td>
+<td class="text-left"><p>No. habitantes por Km2</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>muertes_covid19</p></td>
+<td class="text-left"><p>No. de muertos a causa del COVID-19</p></td>
+<td class="text-center"><p>Int64</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>recuperados_covid19</p></td>
+<td class="text-left"><p>No. personas recuperadas por COVID-19</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>cfr</p></td>
+<td class="text-left"><p>Razon de letalidad</p></td>
+<td class="text-center"><p>Float</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>geometry</p></td>
+<td class="text-left"><p>Geometría del Objeto (Point - Poligono)</p></td>
+<td class="text-center"><p>Object</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fuente-de-datos">
+<h2>Fuente de Datos<a class="headerlink" href="#fuente-de-datos" title="Link to this heading">#</a></h2>
+<p>La información demográfica y de casos positivos de personas con COVID-19, proviene del Instituto Nacional de Salud Colombia y los datos de población de los municipios de Antioquia provienen del DANE, ambos datasets están publicados en el portal Datos Abiertos Colombia. Los mapas y georeferenciación de los municipios son obtenidos del geoportal del DANE y Gobernación de Antioquia. La información meteorológica de temperatura, humedad y altitud fueron obtenidos desde Google Earth Engine.</p>
+<ul class="simple">
+<li><p>INS - Instituto Nacional de Salud Colombia. <a class="reference external" href="https://www.ins.gov.co">https://www.ins.gov.co</a></p></li>
+<li><p>DANE - Departamento Administrativo Nacional de Estadística. <a class="reference external" href="https://geoportal.dane.gov.co/">https://geoportal.dane.gov.co/</a></p></li>
+<li><p>Datos Abiertos Colombia.  <a class="reference external" href="https://www.datos.gov.co/">https://www.datos.gov.co/</a></p></li>
+<li><p>Secretaría Seccional de Salud y Protección Social | Antioquia. <a class="reference external" href="https://dssa.gov.co/">https://dssa.gov.co/</a></p></li>
+<li><p>Geoportal de la Gobernación de Antioquia. <a class="reference external" href="https://geodatos-gobantioquia.opendata.arcgis.com/">https://geodatos-gobantioquia.opendata.arcgis.com/</a></p></li>
+<li><p>Google Earth Engine. <a class="reference external" href="https://earthengine.google.com/">https://earthengine.google.com/</a></p></li>
+</ul>
+</section>
+<section id="carga-de-datos">
+<h2>Carga de Datos<a class="headerlink" href="#carga-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># + tags=[&quot;hide-output&quot;]</span>
+<span class="o">%</span><span class="k">pip</span> install geopandas
+<span class="o">%</span><span class="k">pip</span> install plotly
+<span class="o">%</span><span class="k">pip</span> install matplotlib-map-utils
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting geopandas
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading geopandas-1.1.1-py3-none-any.whl.metadata (2.3 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numpy&gt;=1.24 (from geopandas)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading numpy-2.3.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pyogrio&gt;=0.7.2 (from geopandas)
+  Downloading pyogrio-0.11.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+Requirement already satisfied: packaging in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from geopandas) (25.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas&gt;=2.0.0 (from geopandas)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading pandas-2.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (91 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pyproj&gt;=3.5.0 (from geopandas)
+  Downloading pyproj-3.7.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (31 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting shapely&gt;=2.0.0 (from geopandas)
+  Downloading shapely-2.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from pandas&gt;=2.0.0-&gt;geopandas) (2.9.0.post0)
+Collecting pytz&gt;=2020.1 (from pandas&gt;=2.0.0-&gt;geopandas)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata&gt;=2022.7 (from pandas&gt;=2.0.0-&gt;geopandas)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from pyogrio&gt;=0.7.2-&gt;geopandas) (2025.7.14)
+Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=2.0.0-&gt;geopandas) (1.17.0)
+Downloading geopandas-1.1.1-py3-none-any.whl (338 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading numpy-2.3.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/16.9 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.9/16.9 MB</span> <span class=" -Color -Color-Red">148.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading pandas-2.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.4 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/12.4 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.4/12.4 MB</span> <span class=" -Color -Color-Red">187.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pyogrio-0.11.0-cp311-cp311-manylinux_2_28_x86_64.whl (27.8 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/27.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">27.8/27.8 MB</span> <span class=" -Color -Color-Red">161.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pyproj-3.7.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (9.5 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/9.5 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">9.5/9.5 MB</span> <span class=" -Color -Color-Red">185.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading shapely-2.1.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.1/3.1 MB</span> <span class=" -Color -Color-Red">199.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pytz, tzdata, pyproj, numpy, shapely, pyogrio, pandas, geopandas
+?25l
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/8</span> [tzdata]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/8</span> [pyproj]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3/8</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4/8</span> [shapely]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5/8</span> [pyogrio]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5/8</span> [pyogrio]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">6/8</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━ <span class=" -Color -Color-Green">7/8</span> [geopandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8/8</span> [geopandas]
+?25h
+Successfully installed geopandas-1.1.1 numpy-2.3.2 pandas-2.3.1 pyogrio-0.11.0 pyproj-3.7.1 pytz-2025.2 shapely-2.1.1 tzdata-2025.2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting plotly
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading plotly-6.2.0-py3-none-any.whl.metadata (8.5 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting narwhals&gt;=1.15.1 (from plotly)
+  Downloading narwhals-2.0.0-py3-none-any.whl.metadata (11 kB)
+Requirement already satisfied: packaging in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from plotly) (25.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading plotly-6.2.0-py3-none-any.whl (9.6 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/9.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">9.6/9.6 MB</span> <span class=" -Color -Color-Red">109.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading narwhals-2.0.0-py3-none-any.whl (385 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: narwhals, plotly
+?25l
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0/2</span> [narwhals]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1/2</span> [plotly]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/2</span> [plotly]
+?25h
+Successfully installed narwhals-2.0.0 plotly-6.2.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting matplotlib-map-utils
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading matplotlib_map_utils-3.0.1-py3-none-any.whl.metadata (16 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting matplotlib&gt;=3.9.0 (from matplotlib-map-utils)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading matplotlib-3.10.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+Collecting cartopy&gt;=0.23.0 (from matplotlib-map-utils)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading Cartopy-0.24.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.9 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting great-circle-calculator&gt;=1.3.1 (from matplotlib-map-utils)
+  Downloading great_circle_calculator-1.3.1-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: numpy&gt;=1.23 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.3.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: shapely&gt;=1.8 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2.1.1)
+Requirement already satisfied: packaging&gt;=21 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (25.0)
+Collecting pyshp&gt;=2.3 (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils)
+  Downloading pyshp-2.3.1-py2.py3-none-any.whl.metadata (55 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyproj&gt;=3.3.1 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (3.7.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting contourpy&gt;=1.0.1 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting cycler&gt;=0.10 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting fonttools&gt;=4.22.0 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading fonttools-4.59.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (107 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting kiwisolver&gt;=1.3.1 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading kiwisolver-1.4.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.2 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pillow&gt;=8 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading pillow-11.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pyparsing&gt;=2.3.1 (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils)
+  Downloading pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (2.9.0.post0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: certifi in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from pyproj&gt;=3.3.1-&gt;cartopy&gt;=0.23.0-&gt;matplotlib-map-utils) (2025.7.14)
+Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=3.9.0-&gt;matplotlib-map-utils) (1.17.0)
+Downloading matplotlib_map_utils-3.0.1-py3-none-any.whl (91 kB)
+Downloading Cartopy-0.24.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.7 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/11.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">11.7/11.7 MB</span> <span class=" -Color -Color-Red">130.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading great_circle_calculator-1.3.1-py3-none-any.whl (12 kB)
+Downloading matplotlib-3.10.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.6 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/8.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.6/8.6 MB</span> <span class=" -Color -Color-Red">191.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (355 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading fonttools-4.59.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.0 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/5.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.0/5.0 MB</span> <span class=" -Color -Color-Red">200.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading kiwisolver-1.4.8-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)
+?25l
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/1.4 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.4/1.4 MB</span> <span class=" -Color -Color-Red">168.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pillow-11.3.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.6/6.6 MB</span> <span class=" -Color -Color-Red">198.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+Downloading pyshp-2.3.1-py2.py3-none-any.whl (46 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: great-circle-calculator, pyshp, pyparsing, pillow, kiwisolver, fonttools, cycler, contourpy, matplotlib, cartopy, matplotlib-map-utils
+?25l
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/11</span> [pillow]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/11</span> [pillow]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 5/11</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 5/11</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 5/11</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 5/11</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/11</span> [matplotlib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green"> 9/11</span> [cartopy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green"> 9/11</span> [cartopy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">11/11</span> [matplotlib-map-utils]
+?25h
+Successfully installed cartopy-0.24.1 contourpy-1.3.3 cycler-0.12.1 fonttools-4.59.0 great-circle-calculator-1.3.1 kiwisolver-1.4.8 matplotlib-3.10.3 matplotlib-map-utils-3.0.1 pillow-11.3.0 pyparsing-3.2.3 pyshp-2.3.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib_map_utils.core.north_arrow</span><span class="w"> </span><span class="kn">import</span> <span class="n">NorthArrow</span><span class="p">,</span> <span class="n">north_arrow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib_map_utils.core.scale_bar</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScaleBar</span><span class="p">,</span> <span class="n">scale_bar</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;https://github.com/algarciach/AnalisisGeoespacial/raw/main/Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">)</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   urbanizacion         125 non-null    float64 
+ 10  densidad             125 non-null    float64 
+ 11  muertes_covid19      125 non-null    int64   
+ 12  recuperados_covid19  125 non-null    int64   
+ 13  cfr                  125 non-null    float64 
+ 14  geometry             125 non-null    geometry
+dtypes: float64(7), geometry(1), int64(3), object(4)
+memory usage: 14.8+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>codigo_subregion</th>
+      <th>nombre_subregion</th>
+      <th>area_municipio</th>
+      <th>altitud</th>
+      <th>temperatura</th>
+      <th>humedad_relativa</th>
+      <th>poblacion</th>
+      <th>urbanizacion</th>
+      <th>densidad</th>
+      <th>muertes_covid19</th>
+      <th>recuperados_covid19</th>
+      <th>cfr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05001</td>
+      <td>MEDELLIN</td>
+      <td>01</td>
+      <td>VALLE DE ABURRA</td>
+      <td>374.834005</td>
+      <td>2059.003077</td>
+      <td>18.203481</td>
+      <td>80.582299</td>
+      <td>2616335</td>
+      <td>0.984199</td>
+      <td>6979.983054</td>
+      <td>10353</td>
+      <td>537645</td>
+      <td>1.889240</td>
+      <td>POLYGON ((-75.66974 6.3736, -75.66965 6.3736, ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05002</td>
+      <td>ABEJORRAL</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>507.141095</td>
+      <td>1947.128522</td>
+      <td>17.845754</td>
+      <td>80.265871</td>
+      <td>21468</td>
+      <td>0.430781</td>
+      <td>42.331415</td>
+      <td>24</td>
+      <td>579</td>
+      <td>3.980100</td>
+      <td>POLYGON ((-75.46938 5.94575, -75.46897 5.94571...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05004</td>
+      <td>ABRIAQUI</td>
+      <td>06</td>
+      <td>OCCIDENTE</td>
+      <td>296.894050</td>
+      <td>2371.335448</td>
+      <td>15.912880</td>
+      <td>85.717115</td>
+      <td>2855</td>
+      <td>0.349912</td>
+      <td>9.616225</td>
+      <td>1</td>
+      <td>78</td>
+      <td>1.265823</td>
+      <td>POLYGON ((-76.08351 6.7505, -76.08325 6.75048,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05021</td>
+      <td>ALEJANDRIA</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>128.932153</td>
+      <td>1545.100614</td>
+      <td>20.538783</td>
+      <td>80.036523</td>
+      <td>4955</td>
+      <td>0.591726</td>
+      <td>38.431065</td>
+      <td>6</td>
+      <td>175</td>
+      <td>3.314917</td>
+      <td>POLYGON ((-75.0332 6.41586, -75.03313 6.41585,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05030</td>
+      <td>AMAGA</td>
+      <td>08</td>
+      <td>SUROESTE</td>
+      <td>84.132477</td>
+      <td>1513.740970</td>
+      <td>21.093243</td>
+      <td>78.477931</td>
+      <td>32412</td>
+      <td>0.522152</td>
+      <td>385.249562</td>
+      <td>54</td>
+      <td>1440</td>
+      <td>3.614458</td>
+      <td>POLYGON ((-75.67587 6.08561, -75.6754 6.08491,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;codigo_subregion&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">north_arrow</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;crs&quot;</span><span class="p">:</span> <span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span>  <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;center&quot;</span><span class="p">},</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">scale_bar</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;lower left&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;projection&quot;</span><span class="p">:</span> <span class="mi">4326</span><span class="p">})</span>
+<span class="n">ScaleBar</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="s2">&quot;sm&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mapa de Antioquia por Subregiones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6f8456bc289dc7bdf5270e97d8ef5ed4182a65fc2ca0890ee504862d66bd3e64.png" src="_images/6f8456bc289dc7bdf5270e97d8ef5ed4182a65fc2ca0890ee504862d66bd3e64.png" />
+</div>
+</div>
+</section>
+<section id="preprocesamiento-de-datos">
+<h2>Preprocesamiento de Datos<a class="headerlink" href="#preprocesamiento-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unicodedata</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">nfkd</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">nfkd</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">combining</span><span class="p">(</span><span class="n">c</span><span class="p">)])</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dem">
+<h3>DEM<a class="headerlink" href="#dem" title="Link to this heading">#</a></h3>
+<p>La información de Altitud media de los municipios de Antioquia fue obtenida del dataset NASA SRTM Digital Elevation 30m disponible en Google Earth Engine a través del siguiente script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Load</span> <span class="n">zones</span> <span class="n">Polygons</span>
+<span class="n">var</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;users/algarciach/geo_mpios_antioquia&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Load</span> <span class="n">SRTM</span> <span class="n">DEM</span> <span class="n">dataset</span> <span class="p">(</span><span class="mi">30</span><span class="n">m</span> <span class="n">resolution</span><span class="p">)</span>
+<span class="n">var</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;USGS/SRTMGL1_003&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Calculate</span> <span class="n">mean</span> <span class="n">DEM</span> <span class="n">elevation</span> <span class="n">by</span> <span class="n">zones</span>
+<span class="n">var</span> <span class="n">dem_mean</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">reduceRegions</span><span class="p">({</span>
+  <span class="n">collection</span><span class="p">:</span> <span class="n">zones</span><span class="p">,</span> 
+  <span class="n">reducer</span><span class="p">:</span> <span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">setOutputs</span><span class="p">([</span><span class="s1">&#39;altitud&#39;</span><span class="p">]),</span>
+  <span class="n">scale</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="o">//</span> <span class="n">Export</span> <span class="n">results</span> <span class="k">as</span> <span class="n">GeoJSON</span>
+<span class="n">Export</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">toDrive</span><span class="p">({</span>
+  <span class="n">collection</span><span class="p">:</span> <span class="n">dem_mean</span><span class="p">,</span>
+  <span class="n">description</span><span class="p">:</span> <span class="s1">&#39;dem_mpios_antioquia&#39;</span><span class="p">,</span>
+  <span class="n">fileFormat</span><span class="p">:</span> <span class="s1">&#39;GeoJSON&#39;</span>
+<span class="p">});</span>
+
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem_mpios_antioquia</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Processed/dem_mpios_antioquia.geojson&#39;</span><span class="p">)</span>
+<span class="n">dem_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 8 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   id          125 non-null    object  
+ 1   altitud     125 non-null    float64 
+ 2   area_munic  125 non-null    float64 
+ 3   codigo_mun  125 non-null    object  
+ 4   nombre_mun  125 non-null    object  
+ 5   shape_Area  125 non-null    float64 
+ 6   shape_Leng  125 non-null    float64 
+ 7   geometry    125 non-null    geometry
+dtypes: float64(4), geometry(1), object(3)
+memory usage: 7.9+ KB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="temperature-relative-humity">
+<h3>Temperature &amp; Relative Humity<a class="headerlink" href="#temperature-relative-humity" title="Link to this heading">#</a></h3>
+<p>La información de Temperatura media anual de los municipios de Antioquia fue obtenida de los datasets WorldClim BIO Variables V1 y la Humedad Relativa media anual fue estimada a partir de los datasets ERA5-Land Monthly - ECMWF Climate Reanalys, ambos disponibles en Google Earth Engine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>// Load zones polygons
+var zones = ee.FeatureCollection(&quot;users/algarciach/geo_mpios_antioquia&quot;);
+
+// Load WorldClim V1 BIO1 (Annual Mean Temperature * 10)
+var worldclim = ee.Image(&#39;WORLDCLIM/V1/BIO&#39;)
+  .select(&#39;bio01&#39;)  // BIO1
+  .divide(10)       // Convert to °C
+  .rename(&#39;temperatura&#39;);
+
+// Load ERA5-Land Monthly data for 2020
+var era5 = ee.ImageCollection(&#39;ECMWF/ERA5_LAND/MONTHLY&#39;)
+  .filterDate(&#39;2020-01-01&#39;, &#39;2020-12-31&#39;);
+
+// Compute mean temperature and dewpoint (°C)
+var temp = era5.select(&#39;temperature_2m&#39;).mean().subtract(273.15);
+var dewpoint = era5.select(&#39;dewpoint_temperature_2m&#39;).mean().subtract(273.15);
+
+// Constants for Clausius–Clapeyron
+var a = 17.625;
+var b = 243.04;
+
+// Saturation vapor pressure (es) from temperature
+var es = temp.expression(
+  &#39;6.112 * exp((a * T) / (b + T))&#39;,
+  {T: temp, a: a, b: b}
+);
+
+// Actual vapor pressure (ea) from dewpoint
+var ea = dewpoint.expression(
+  &#39;6.112 * exp((a * Td) / (b + Td))&#39;,
+  {Td: dewpoint, a: a, b: b}
+);
+
+// Calculate RH (%), clipped between 0 and 100
+var rh = ea.divide(es).multiply(100).max(0).min(100).rename(&#39;humedad_relative&#39;);
+
+// Combine WorldClim temp and ERA5 RH
+var combined = worldclim.addBands(rh);
+
+// Reduce by zones (mean values)
+var stats = combined.reduceRegions({
+  collection: zones,
+  reducer: ee.Reducer.mean(),
+  scale: 1000,  // ERA5 native scale approx
+});
+print(stats)
+// Export results as GeoJSON to Google Drive
+Export.table.toDrive({
+  collection: stats,
+  description: &#39;trh_mpios_antioquia&#39;,
+  fileFormat: &#39;GeoJSON&#39;
+});
+
+
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trh_mpios_antioquia</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Processed/trh_mpios_antioquia.geojson&#39;</span><span class="p">)</span>
+<span class="n">trh_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 9 columns):
+ #   Column            Non-Null Count  Dtype   
+---  ------            --------------  -----   
+ 0   id                125 non-null    object  
+ 1   area_munic        125 non-null    float64 
+ 2   codigo_mun        125 non-null    object  
+ 3   humedad_relative  125 non-null    float64 
+ 4   nombre_mun        125 non-null    object  
+ 5   shape_Area        125 non-null    float64 
+ 6   shape_Leng        125 non-null    float64 
+ 7   temperatura       125 non-null    float64 
+ 8   geometry          125 non-null    geometry
+dtypes: float64(5), geometry(1), object(3)
+memory usage: 8.9+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dem_mpios_antioquia</span> <span class="o">=</span> <span class="n">dem_mpios_antioquia</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;codigo_mun&#39;</span><span class="p">:</span> <span class="s1">&#39;codigo_municipio&#39;</span><span class="p">})</span>
+<span class="n">trh_mpios_antioquia</span> <span class="o">=</span> <span class="n">trh_mpios_antioquia</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;humedad_relative&#39;</span><span class="p">:</span> <span class="s1">&#39;humedad_relativa&#39;</span><span class="p">,</span> <span class="s1">&#39;codigo_mun&#39;</span><span class="p">:</span> <span class="s1">&#39;codigo_municipio&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos-demograficos">
+<h3>Datos Demográficos<a class="headerlink" href="#datos-demograficos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poblacion_mpios_antioquia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Sources/poblacion_antioquia_2024.csv&#39;</span><span class="p">)</span>
+<span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">poblacion_mpios_antioquia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Sources/poblacion_antioquia_2024.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.13/x64/lib/python3.11/site-packages/pandas/io/common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../Covid19_model/Data/Sources/poblacion_antioquia_2024.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poblacion_mpios_antioquia</span><span class="p">[</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poblacion_mpios_antioquia</span><span class="p">[</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">poblacion_mpios_antioquia</span><span class="p">[</span><span class="s1">&#39;codigo_subregion&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">poblacion_mpios_antioquia</span><span class="p">[</span><span class="s1">&#39;codigo_subregion&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 8 columns):
+ #   Column            Non-Null Count  Dtype 
+---  ------            --------------  ----- 
+ 0   codigo_municipio  125 non-null    object
+ 1   nombre_municipio  125 non-null    object
+ 2   nombre_subregion  125 non-null    object
+ 3   codigo_subregion  125 non-null    object
+ 4   poblacion         125 non-null    int64 
+ 5   urbana            125 non-null    int64 
+ 6   hombres           125 non-null    int64 
+ 7   mujeres           125 non-null    int64 
+dtypes: int64(4), object(4)
+memory usage: 7.9+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>nombre_subregion</th>
+      <th>codigo_subregion</th>
+      <th>poblacion</th>
+      <th>urbana</th>
+      <th>hombres</th>
+      <th>mujeres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05142</td>
+      <td>CARACOLI</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>4824</td>
+      <td>3100</td>
+      <td>2417</td>
+      <td>2407</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05425</td>
+      <td>MACEO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>8707</td>
+      <td>3754</td>
+      <td>4299</td>
+      <td>4408</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05579</td>
+      <td>PUERTO BERRIO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>42203</td>
+      <td>36749</td>
+      <td>21122</td>
+      <td>21081</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05585</td>
+      <td>PUERTO NARE</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>15232</td>
+      <td>5668</td>
+      <td>7563</td>
+      <td>7669</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05591</td>
+      <td>PUERTO TRIUNFO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>19554</td>
+      <td>4265</td>
+      <td>10696</td>
+      <td>8858</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poblacion_mpios_antioquia</span> <span class="o">=</span> <span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">dem_mpios_antioquia</span><span class="p">[[</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span> <span class="s1">&#39;altitud&#39;</span><span class="p">]],</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+<span class="n">poblacion_mpios_antioquia</span> <span class="o">=</span> <span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">trh_mpios_antioquia</span><span class="p">[[</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span> <span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad_relativa&#39;</span><span class="p">]],</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 11 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   codigo_municipio  125 non-null    object 
+ 1   nombre_municipio  125 non-null    object 
+ 2   nombre_subregion  125 non-null    object 
+ 3   codigo_subregion  125 non-null    object 
+ 4   poblacion         125 non-null    int64  
+ 5   urbana            125 non-null    int64  
+ 6   hombres           125 non-null    int64  
+ 7   mujeres           125 non-null    int64  
+ 8   altitud           125 non-null    float64
+ 9   temperatura       125 non-null    float64
+ 10  humedad_relativa  125 non-null    float64
+dtypes: float64(3), int64(4), object(4)
+memory usage: 10.9+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>nombre_subregion</th>
+      <th>codigo_subregion</th>
+      <th>poblacion</th>
+      <th>urbana</th>
+      <th>hombres</th>
+      <th>mujeres</th>
+      <th>altitud</th>
+      <th>temperatura</th>
+      <th>humedad_relativa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05142</td>
+      <td>CARACOLI</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>4824</td>
+      <td>3100</td>
+      <td>2417</td>
+      <td>2407</td>
+      <td>624.071779</td>
+      <td>25.104725</td>
+      <td>74.246953</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05425</td>
+      <td>MACEO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>8707</td>
+      <td>3754</td>
+      <td>4299</td>
+      <td>4408</td>
+      <td>801.129901</td>
+      <td>24.064321</td>
+      <td>75.486478</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05579</td>
+      <td>PUERTO BERRIO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>42203</td>
+      <td>36749</td>
+      <td>21122</td>
+      <td>21081</td>
+      <td>302.977808</td>
+      <td>26.774666</td>
+      <td>68.166473</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05585</td>
+      <td>PUERTO NARE</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>15232</td>
+      <td>5668</td>
+      <td>7563</td>
+      <td>7669</td>
+      <td>308.099489</td>
+      <td>26.793396</td>
+      <td>68.317391</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05591</td>
+      <td>PUERTO TRIUNFO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>19554</td>
+      <td>4265</td>
+      <td>10696</td>
+      <td>8858</td>
+      <td>222.031621</td>
+      <td>27.299693</td>
+      <td>63.247296</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>05893</td>
+      <td>YONDO</td>
+      <td>MAGDALENA MEDIO</td>
+      <td>03</td>
+      <td>20727</td>
+      <td>11505</td>
+      <td>10601</td>
+      <td>10126</td>
+      <td>100.100005</td>
+      <td>28.162071</td>
+      <td>77.437891</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>05120</td>
+      <td>CACERES</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>31160</td>
+      <td>7512</td>
+      <td>16275</td>
+      <td>14885</td>
+      <td>195.446369</td>
+      <td>27.318936</td>
+      <td>79.260224</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>05154</td>
+      <td>CAUCASIA</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>97803</td>
+      <td>87577</td>
+      <td>47630</td>
+      <td>50173</td>
+      <td>66.545031</td>
+      <td>28.252375</td>
+      <td>79.681802</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>05250</td>
+      <td>EL BAGRE</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>56306</td>
+      <td>37976</td>
+      <td>27563</td>
+      <td>28743</td>
+      <td>319.953193</td>
+      <td>27.260740</td>
+      <td>82.583046</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>05495</td>
+      <td>NECHI</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>27901</td>
+      <td>15582</td>
+      <td>14426</td>
+      <td>13475</td>
+      <td>96.851039</td>
+      <td>28.129927</td>
+      <td>81.476302</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>05790</td>
+      <td>TARAZA</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>29082</td>
+      <td>15143</td>
+      <td>14354</td>
+      <td>14728</td>
+      <td>494.880668</td>
+      <td>25.225125</td>
+      <td>81.998193</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>05895</td>
+      <td>ZARAGOZA</td>
+      <td>BAJO CAUCA</td>
+      <td>02</td>
+      <td>26207</td>
+      <td>13248</td>
+      <td>12959</td>
+      <td>13248</td>
+      <td>160.802895</td>
+      <td>28.059689</td>
+      <td>79.529422</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>05045</td>
+      <td>APARTADO</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>131422</td>
+      <td>111893</td>
+      <td>63795</td>
+      <td>67627</td>
+      <td>285.078216</td>
+      <td>25.433774</td>
+      <td>86.372459</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>05051</td>
+      <td>ARBOLETES</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>32192</td>
+      <td>12417</td>
+      <td>16015</td>
+      <td>16177</td>
+      <td>93.569203</td>
+      <td>26.380416</td>
+      <td>83.501483</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>05147</td>
+      <td>CAREPA</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>52184</td>
+      <td>38934</td>
+      <td>25854</td>
+      <td>26330</td>
+      <td>156.375257</td>
+      <td>26.130814</td>
+      <td>86.172635</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>05172</td>
+      <td>CHIGORODO</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>62235</td>
+      <td>53310</td>
+      <td>29833</td>
+      <td>32402</td>
+      <td>159.246260</td>
+      <td>26.328408</td>
+      <td>86.430314</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>05475</td>
+      <td>MURINDO</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>5300</td>
+      <td>2109</td>
+      <td>2686</td>
+      <td>2614</td>
+      <td>201.025719</td>
+      <td>26.695252</td>
+      <td>87.751184</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>05480</td>
+      <td>MUTATA</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>15035</td>
+      <td>6390</td>
+      <td>7611</td>
+      <td>7424</td>
+      <td>530.529721</td>
+      <td>24.765298</td>
+      <td>87.876939</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>05490</td>
+      <td>NECOCLI</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>45530</td>
+      <td>14391</td>
+      <td>22432</td>
+      <td>23098</td>
+      <td>67.026486</td>
+      <td>26.220963</td>
+      <td>83.841781</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>05659</td>
+      <td>SAN JUAN DE URABA</td>
+      <td>URABA</td>
+      <td>09</td>
+      <td>21707</td>
+      <td>8333</td>
+      <td>10667</td>
+      <td>11040</td>
+      <td>57.921900</td>
+      <td>26.447830</td>
+      <td>84.156679</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poblacion_mpios_antioquia</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Processed/poblacion_mpios_antioquia.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos-covid19">
+<h3>Datos Covid19<a class="headerlink" href="#datos-covid19" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar por casos de COVID-19 en Antioquia</span>
+<span class="n">covid19_colombia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Sources/Casos_positivos_de_COVID-19_en_Colombia._20250404.csv&#39;</span><span class="p">)</span>
+<span class="n">covid19_antioquia</span> <span class="o">=</span> <span class="n">covid19_colombia</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;`Nombre departamento` == &#39;ANTIOQUIA&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 955271 entries, 14 to 6390951
+Data columns (total 23 columns):
+ #   Column                        Non-Null Count   Dtype  
+---  ------                        --------------   -----  
+ 0   fecha reporte web             955271 non-null  object 
+ 1   ID de caso                    955271 non-null  int64  
+ 2   Fecha de notificación         955271 non-null  object 
+ 3   Código DIVIPOLA departamento  955271 non-null  int64  
+ 4   Nombre departamento           955271 non-null  object 
+ 5   Código DIVIPOLA municipio     955271 non-null  int64  
+ 6   Nombre municipio              955271 non-null  object 
+ 7   Edad                          955271 non-null  int64  
+ 8   Unidad de medida de edad      955271 non-null  int64  
+ 9   Sexo                          955271 non-null  object 
+ 10  Tipo de contagio              955271 non-null  object 
+ 11  Ubicación del caso            950658 non-null  object 
+ 12  Estado                        950658 non-null  object 
+ 13  Código ISO del país           850 non-null     float64
+ 14  Nombre del país               850 non-null     object 
+ 15  Recuperado                    951161 non-null  object 
+ 16  Fecha de inicio de síntomas   953785 non-null  object 
+ 17  Fecha de muerte               23330 non-null   object 
+ 18  Fecha de diagnóstico          954937 non-null  object 
+ 19  Fecha de recuperación         932156 non-null  object 
+ 20  Tipo de recuperación          932147 non-null  object 
+ 21  Pertenencia étnica            955106 non-null  float64
+ 22  Nombre del grupo étnico       2886 non-null    object 
+dtypes: float64(2), int64(5), object(16)
+memory usage: 174.9+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_antioquia</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;fecha reporte web&quot;</span><span class="p">:</span> <span class="s2">&quot;fecha_reporte&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Código DIVIPOLA municipio&quot;</span><span class="p">:</span> <span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Recuperado&quot;</span><span class="p">:</span> <span class="s2">&quot;estado&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="s2">&quot;edad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Sexo&quot;</span><span class="p">:</span> <span class="s2">&quot;sexo&quot;</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;fecha_reporte&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;fecha_reporte&quot;</span><span class="p">])</span>
+<span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;muertes_covid19&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;estado&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Fallecido&quot;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;recuperados_covid19&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="s2">&quot;estado&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Recuperado&quot;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">covid19_antioquia</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[[</span><span class="s2">&quot;fecha_reporte&quot;</span><span class="p">,</span> <span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;edad&quot;</span><span class="p">,</span> <span class="s2">&quot;sexo&quot;</span><span class="p">,</span> <span class="s2">&quot;muertes_covid19&quot;</span><span class="p">,</span> <span class="s2">&quot;recuperados_covid19&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 955271 entries, 14 to 6390951
+Data columns (total 6 columns):
+ #   Column               Non-Null Count   Dtype         
+---  ------               --------------   -----         
+ 0   fecha_reporte        955271 non-null  datetime64[ns]
+ 1   codigo_municipio     955271 non-null  object        
+ 2   edad                 955271 non-null  int64         
+ 3   sexo                 955271 non-null  object        
+ 4   muertes_covid19      955271 non-null  int64         
+ 5   recuperados_covid19  955271 non-null  int64         
+dtypes: datetime64[ns](1), int64(3), object(2)
+memory usage: 51.0+ MB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha_reporte</th>
+      <th>codigo_municipio</th>
+      <th>edad</th>
+      <th>sexo</th>
+      <th>muertes_covid19</th>
+      <th>recuperados_covid19</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14</th>
+      <td>2020-11-08</td>
+      <td>05266</td>
+      <td>37</td>
+      <td>F</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020-11-08</td>
+      <td>05266</td>
+      <td>37</td>
+      <td>F</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2020-11-08</td>
+      <td>05360</td>
+      <td>36</td>
+      <td>F</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>2020-11-08</td>
+      <td>05266</td>
+      <td>63</td>
+      <td>F</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>2020-08-05</td>
+      <td>05001</td>
+      <td>52</td>
+      <td>M</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fecha_inicio</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="s1">&#39;fecha_reporte&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">fecha_fin</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="s1">&#39;fecha_reporte&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fecha inicial:&quot;</span><span class="p">,</span> <span class="n">fecha_inicio</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fecha final:&quot;</span><span class="p">,</span> <span class="n">fecha_fin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha inicial: 2020-03-09 00:00:00
+Fecha final: 2024-01-17 00:00:00
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fecha_corte</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;2023-12-31&quot;</span><span class="p">)</span>
+<span class="n">covid19_antioquia</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="p">[</span><span class="n">covid19_antioquia</span><span class="p">[</span><span class="s1">&#39;fecha_reporte&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">fecha_corte</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Processed/covid19_antioquia.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar por casos de COVID-19 por municipio</span>
+<span class="n">covid19_mpios_antioquia</span> <span class="o">=</span> <span class="n">covid19_antioquia</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;muertes_covid19&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;recuperados_covid19&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_mpios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">covid19_mpios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 3 columns):
+ #   Column               Non-Null Count  Dtype 
+---  ------               --------------  ----- 
+ 0   codigo_municipio     125 non-null    object
+ 1   muertes_covid19      125 non-null    int64 
+ 2   recuperados_covid19  125 non-null    int64 
+dtypes: int64(2), object(1)
+memory usage: 3.1+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>muertes_covid19</th>
+      <th>recuperados_covid19</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05001</td>
+      <td>10353</td>
+      <td>537645</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05002</td>
+      <td>24</td>
+      <td>579</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05004</td>
+      <td>1</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05021</td>
+      <td>6</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05030</td>
+      <td>54</td>
+      <td>1440</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="datos-geograficos">
+<h3>Datos Geográficos<a class="headerlink" href="#datos-geograficos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_colombia</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;../Covid19_model/Data/Sources/MGN2024_MPIO_POLITICO/MGN_ADM_MPIO_GRAFICO.shp&#39;</span><span class="p">)</span>
+<span class="n">geo_municipios_antioquia</span> <span class="o">=</span> <span class="n">geo_colombia</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;dpto_ccdgo == &#39;05&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">geo_municipios_antioquia</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">geo_municipios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG:4326
+&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+Index: 125 entries, 0 to 124
+Data columns (total 12 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   dpto_ccdgo  125 non-null    object  
+ 1   mpio_ccdgo  125 non-null    object  
+ 2   mpio_cdpmp  125 non-null    object  
+ 3   dpto_cnmbr  125 non-null    object  
+ 4   mpio_cnmbr  125 non-null    object  
+ 5   mpio_crslc  125 non-null    object  
+ 6   mpio_tipo   125 non-null    object  
+ 7   mpio_narea  125 non-null    float64 
+ 8   mpio_nano   125 non-null    int32   
+ 9   shape_Leng  125 non-null    float64 
+ 10  shape_Area  125 non-null    float64 
+ 11  geometry    125 non-null    geometry
+dtypes: float64(3), geometry(1), int32(1), object(7)
+memory usage: 12.2+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">municipios_antioquia</span> <span class="o">=</span> <span class="n">geo_municipios_antioquia</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;mpio_cdpmp&quot;</span><span class="p">:</span> <span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span>
+                                                          <span class="s2">&quot;mpio_cnmbr&quot;</span><span class="p">:</span> <span class="s2">&quot;nombre_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;mpio_narea&quot;</span><span class="p">:</span> <span class="s2">&quot;area_municipio&quot;</span><span class="p">})</span>
+<span class="n">municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;nombre_municipio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;nombre_municipio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">normalize</span><span class="p">)</span>
+<span class="n">municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">municipios_antioquia</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">poblacion_mpios_antioquia</span><span class="p">[[</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;nombre_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;codigo_municipio&quot;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+<span class="n">municipios_antioquia</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="p">[[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;nombre_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span><span class="s2">&quot;nombre_subregion&quot;</span><span class="p">,</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG:4326
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>codigo_subregion</th>
+      <th>nombre_subregion</th>
+      <th>area_municipio</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05001</td>
+      <td>MEDELLIN</td>
+      <td>01</td>
+      <td>VALLE DE ABURRA</td>
+      <td>374.834005</td>
+      <td>POLYGON ((-75.66974 6.3736, -75.66965 6.3736, ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05002</td>
+      <td>ABEJORRAL</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>507.141095</td>
+      <td>POLYGON ((-75.46938 5.94575, -75.46897 5.94571...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05004</td>
+      <td>ABRIAQUI</td>
+      <td>06</td>
+      <td>OCCIDENTE</td>
+      <td>296.894050</td>
+      <td>POLYGON ((-76.08351 6.7505, -76.08325 6.75048,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05021</td>
+      <td>ALEJANDRIA</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>128.932153</td>
+      <td>POLYGON ((-75.0332 6.41586, -75.03313 6.41585,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05030</td>
+      <td>AMAGA</td>
+      <td>08</td>
+      <td>SUROESTE</td>
+      <td>84.132477</td>
+      <td>POLYGON ((-75.67587 6.08561, -75.6754 6.08491,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;../Covid19_model/Data/Processed/areas_municipios_antioquia.geojson&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Agrupar municipios por subregiones</span>
+<span class="n">subregiones_antioquia</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">subregiones_antioquia</span> <span class="o">=</span> <span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">:</span> <span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span>
+                                                              <span class="s2">&quot;nombre_subregion&quot;</span><span class="p">:</span> <span class="s2">&quot;nombre_subregion&quot;</span><span class="p">,</span>
+                                                              <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="s2">&quot;geometry&quot;</span><span class="p">})</span>
+<span class="n">subregiones_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subregiones_antioquia</span><span class="p">[</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">subregiones_antioquia</span> <span class="o">=</span> <span class="n">subregiones_antioquia</span><span class="p">[[</span><span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;nombre_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG:4326
+&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 9 entries, 0 to 8
+Data columns (total 3 columns):
+ #   Column            Non-Null Count  Dtype   
+---  ------            --------------  -----   
+ 0   codigo_subregion  9 non-null      object  
+ 1   nombre_subregion  9 non-null      object  
+ 2   geometry          9 non-null      geometry
+dtypes: geometry(1), object(2)
+memory usage: 348.0+ bytes
+None
+  codigo_subregion nombre_subregion  \
+0               01  VALLE DE ABURRA   
+1               02       BAJO CAUCA   
+2               03  MAGDALENA MEDIO   
+3               04         NORDESTE   
+4               05            NORTE   
+
+                                            geometry  
+0  POLYGON ((-75.57241 6.09957, -75.57319 6.09909...  
+1  POLYGON ((-75.16579 7.35527, -75.16599 7.35485...  
+2  POLYGON ((-74.57163 6.03452, -74.57021 6.02705...  
+3  POLYGON ((-74.8388 6.51013, -74.83874 6.51016,...  
+4  POLYGON ((-75.48834 6.43038, -75.48941 6.43067...  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;../Covid19_model/Data/Processed/areas_subregiones_antioquia.geojson&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;GeoJSON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Areas de Antioquia por Municipios&#39;</span><span class="p">)</span>   
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5175d230485c5c3a0bafe40a7bdb2f8e298b38c7d973f538ac0b0cfed2a51199.png" src="_images/5175d230485c5c3a0bafe40a7bdb2f8e298b38c7d973f538ac0b0cfed2a51199.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subregiones_antioquia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Areas de Antioquia por Subregiones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7e3d1a3db5b04a1d2461d56968cd1ba58f15ddca2ed484ddaf1ceaa1076871f9.png" src="_images/7e3d1a3db5b04a1d2461d56968cd1ba58f15ddca2ed484ddaf1ceaa1076871f9.png" />
+</div>
+</div>
+</section>
+<section id="unir-datos-demograficos-y-covid19-con-geograficos">
+<h3>Unir datos Demográficos y Covid19 con Geográficos<a class="headerlink" href="#unir-datos-demograficos-y-covid19-con-geograficos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_municipios_antioquia</span> <span class="o">=</span> <span class="n">municipios_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">poblacion_mpios_antioquia</span><span class="p">[[</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span> <span class="s2">&quot;poblacion&quot;</span><span class="p">,</span> <span class="s2">&quot;urbana&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">]],</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+<span class="n">covid19_municipios_antioquia</span> <span class="o">=</span> <span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">covid19_mpios_antioquia</span><span class="p">,</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;codigo_municipio&#39;</span><span class="p">,</span>
+    <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+
+<span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;urbanizacion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;urbana&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;poblacion&quot;</span><span class="p">])</span>
+<span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;densidad&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;poblacion&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;area_municipio&quot;</span><span class="p">]</span>
+<span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;cfr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;muertes_covid19&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;muertes_covid19&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">covid19_municipios_antioquia</span><span class="p">[</span><span class="s2">&quot;recuperados_covid19&quot;</span><span class="p">]))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">covid19_municipios_antioquia</span> <span class="o">=</span> <span class="n">covid19_municipios_antioquia</span><span class="p">[[</span><span class="s2">&quot;codigo_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;nombre_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;codigo_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;nombre_subregion&quot;</span><span class="p">,</span> <span class="s2">&quot;area_municipio&quot;</span><span class="p">,</span> <span class="s2">&quot;altitud&quot;</span><span class="p">,</span> <span class="s2">&quot;temperatura&quot;</span><span class="p">,</span> <span class="s2">&quot;humedad_relativa&quot;</span><span class="p">,</span> <span class="s2">&quot;poblacion&quot;</span><span class="p">,</span> <span class="s2">&quot;urbanizacion&quot;</span><span class="p">,</span> <span class="s2">&quot;densidad&quot;</span><span class="p">,</span> <span class="s2">&quot;muertes_covid19&quot;</span><span class="p">,</span> <span class="s2">&quot;recuperados_covid19&quot;</span><span class="p">,</span> <span class="s2">&quot;cfr&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   urbanizacion         125 non-null    float64 
+ 10  densidad             125 non-null    float64 
+ 11  muertes_covid19      125 non-null    int64   
+ 12  recuperados_covid19  125 non-null    int64   
+ 13  cfr                  125 non-null    float64 
+ 14  geometry             125 non-null    geometry
+dtypes: float64(7), geometry(1), int64(3), object(4)
+memory usage: 14.8+ KB
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>codigo_municipio</th>
+      <th>nombre_municipio</th>
+      <th>codigo_subregion</th>
+      <th>nombre_subregion</th>
+      <th>area_municipio</th>
+      <th>altitud</th>
+      <th>temperatura</th>
+      <th>humedad_relativa</th>
+      <th>poblacion</th>
+      <th>urbanizacion</th>
+      <th>densidad</th>
+      <th>muertes_covid19</th>
+      <th>recuperados_covid19</th>
+      <th>cfr</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05001</td>
+      <td>MEDELLIN</td>
+      <td>01</td>
+      <td>VALLE DE ABURRA</td>
+      <td>374.834005</td>
+      <td>2059.003077</td>
+      <td>18.203481</td>
+      <td>80.582299</td>
+      <td>2616335</td>
+      <td>0.984199</td>
+      <td>6979.983054</td>
+      <td>10353</td>
+      <td>537645</td>
+      <td>1.889240</td>
+      <td>POLYGON ((-75.66974 6.3736, -75.66965 6.3736, ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05002</td>
+      <td>ABEJORRAL</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>507.141095</td>
+      <td>1947.128522</td>
+      <td>17.845754</td>
+      <td>80.265871</td>
+      <td>21468</td>
+      <td>0.430781</td>
+      <td>42.331415</td>
+      <td>24</td>
+      <td>579</td>
+      <td>3.980100</td>
+      <td>POLYGON ((-75.46938 5.94575, -75.46897 5.94571...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05004</td>
+      <td>ABRIAQUI</td>
+      <td>06</td>
+      <td>OCCIDENTE</td>
+      <td>296.894050</td>
+      <td>2371.335448</td>
+      <td>15.912880</td>
+      <td>85.717115</td>
+      <td>2855</td>
+      <td>0.349912</td>
+      <td>9.616225</td>
+      <td>1</td>
+      <td>78</td>
+      <td>1.265823</td>
+      <td>POLYGON ((-76.08351 6.7505, -76.08325 6.75048,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05021</td>
+      <td>ALEJANDRIA</td>
+      <td>07</td>
+      <td>ORIENTE</td>
+      <td>128.932153</td>
+      <td>1545.100614</td>
+      <td>20.538783</td>
+      <td>80.036523</td>
+      <td>4955</td>
+      <td>0.591726</td>
+      <td>38.431065</td>
+      <td>6</td>
+      <td>175</td>
+      <td>3.314917</td>
+      <td>POLYGON ((-75.0332 6.41586, -75.03313 6.41585,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05030</td>
+      <td>AMAGA</td>
+      <td>08</td>
+      <td>SUROESTE</td>
+      <td>84.132477</td>
+      <td>1513.740970</td>
+      <td>21.093243</td>
+      <td>78.477931</td>
+      <td>32412</td>
+      <td>0.522152</td>
+      <td>385.249562</td>
+      <td>54</td>
+      <td>1440</td>
+      <td>3.614458</td>
+      <td>POLYGON ((-75.67587 6.08561, -75.6754 6.08491,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;../Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;GPKG&#39;</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;covid19_municipios_antioquia&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">covid19_municipios_antioquia</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../Covid19_model/Data/covid19_municipios_antioquia.gpkg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+<span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>   
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>    
+<span class="n">covid19_municipios_antioquia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;cfr&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tasa de letalidad por COVID-19 en Antioquia por municipio&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EPSG:4326
+&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 125 entries, 0 to 124
+Data columns (total 15 columns):
+ #   Column               Non-Null Count  Dtype   
+---  ------               --------------  -----   
+ 0   codigo_municipio     125 non-null    object  
+ 1   nombre_municipio     125 non-null    object  
+ 2   codigo_subregion     125 non-null    object  
+ 3   nombre_subregion     125 non-null    object  
+ 4   area_municipio       125 non-null    float64 
+ 5   altitud              125 non-null    float64 
+ 6   temperatura          125 non-null    float64 
+ 7   humedad_relativa     125 non-null    float64 
+ 8   poblacion            125 non-null    int64   
+ 9   urbanizacion         125 non-null    float64 
+ 10  densidad             125 non-null    float64 
+ 11  muertes_covid19      125 non-null    int64   
+ 12  recuperados_covid19  125 non-null    int64   
+ 13  cfr                  125 non-null    float64 
+ 14  geometry             125 non-null    geometry
+dtypes: float64(7), geometry(1), int64(3), object(4)
+memory usage: 14.8+ KB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Tasa de letalidad por COVID-19 en Antioquia por municipio&#39;)
+</pre></div>
+</div>
+<img alt="_images/694dde0984823ef744a604aa9e80d1b40f8873713ec1775269f211fd76943fa0.png" src="_images/694dde0984823ef744a604aa9e80d1b40f8873713ec1775269f211fd76943fa0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Curso Análisis Geoespacial - Edier V. Aristizabal G.</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01_point-pattern.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Patron de Puntos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-variables">Definición de Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catalogo-de-variables">Catálogo de Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuente-de-datos">Fuente de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-datos">Carga de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">Preprocesamiento de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dem">DEM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-relative-humity">Temperature &amp; Relative Humity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-demograficos">Datos Demográficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-covid19">Datos Covid19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-geograficos">Datos Geográficos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unir-datos-demograficos-y-covid19-con-geograficos">Unir datos Demográficos y Covid19 con Geográficos</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alvin Garcia Chaves
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Licensed under CC BY 4.0.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
