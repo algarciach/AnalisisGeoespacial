@@ -1,0 +1,264 @@
+\begin{thebibliography}{28}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Franch-Pardo et~al.(2020)Franch-Pardo, Napoletano, Rosete-Verges, and
+  Billa}]{Franch-Pardo2020}
+\bibinfo{author}{I.~Franch-Pardo}, \bibinfo{author}{B.~M. Napoletano},
+  \bibinfo{author}{F.~Rosete-Verges}, \bibinfo{author}{L.~Billa},
+\newblock \bibinfo{title}{Spatial analysis and gis in the study of covid-19. a
+  review},
+\newblock \bibinfo{journal}{Science of the Total Environment}
+  \bibinfo{volume}{739} (\bibinfo{year}{2020}).
+%Type = Inproceedings
+\bibitem[{Turbe et~al.(2020)Turbe, Ruiz, Bjelogrlic, Rochat, and
+  Lovis}]{Turbe2020}
+\bibinfo{author}{H.~Turbe}, \bibinfo{author}{V.~G. Ruiz},
+  \bibinfo{author}{M.~Bjelogrlic}, \bibinfo{author}{J.~Rochat},
+  \bibinfo{author}{C.~Lovis},
+\newblock \bibinfo{title}{Communicating on multivariate and geospatial data
+  supported by ergonomics criteria: Covid-19 case},
+\newblock in: \bibinfo{booktitle}{Proceedings - 2020 Workshop on Visual
+  Analytics in Healthcare, VAHC 2020}, \bibinfo{publisher}{Institute of
+  Electrical and Electronics Engineers Inc.}, \bibinfo{year}{2020}, pp.
+  \bibinfo{pages}{4--16}. \DOIprefix\doi{10.1109/VAHC53729.2020.00008}.
+%Type = Article
+\bibitem[{Cuomo et~al.(2021)Cuomo, Purushothaman, Li, Cai, and
+  Mackey}]{Cuomo2021}
+\bibinfo{author}{R.~E. Cuomo}, \bibinfo{author}{V.~Purushothaman},
+  \bibinfo{author}{J.~Li}, \bibinfo{author}{M.~Cai}, \bibinfo{author}{T.~K.
+  Mackey},
+\newblock \bibinfo{title}{A longitudinal and geospatial analysis of covid-19
+  tweets during the early outbreak period in the united states},
+\newblock \bibinfo{journal}{BMC Public Health} \bibinfo{volume}{21}
+  (\bibinfo{year}{2021}).
+%Type = Misc
+\bibitem[{Lin et~al.(2024)Lin, Zou, Yang, Zhou, Mandal, Abedin, Cai, and
+  Ning}]{Lin2024}
+\bibinfo{author}{B.~Lin}, \bibinfo{author}{L.~Zou}, \bibinfo{author}{M.~Yang},
+  \bibinfo{author}{B.~Zhou}, \bibinfo{author}{D.~Mandal},
+  \bibinfo{author}{J.~Abedin}, \bibinfo{author}{H.~Cai},
+  \bibinfo{author}{N.~Ning}, \bibinfo{title}{Progress in understanding
+  human-covid-19 dynamics using geospatial big data: a systematic review},
+  \bibinfo{year}{2024}. \DOIprefix\doi{10.1080/19475683.2024.2418584}.
+%Type = Article
+\bibitem[{Chen et~al.(2021)Chen, Jiang, Cao, Yang, and Zhao}]{Chen2021}
+\bibinfo{author}{Y.~Chen}, \bibinfo{author}{N.~Jiang},
+  \bibinfo{author}{Y.~Cao}, \bibinfo{author}{Z.~Yang},
+  \bibinfo{author}{X.~Zhao},
+\newblock \bibinfo{title}{Visual method of analyzing covid-19 case information
+  using spatio-temporal objects with multi-granularity},
+\newblock \bibinfo{journal}{Journal of Geographical Sciences}
+  \bibinfo{volume}{31} (\bibinfo{year}{2021}) \bibinfo{pages}{1059--1081}.
+%Type = Article
+\bibitem[{Yu et~al.(2021)Yu, Li, Bardin, Gu, and Fan}]{Yu2021}
+\bibinfo{author}{H.~Yu}, \bibinfo{author}{J.~Li}, \bibinfo{author}{S.~Bardin},
+  \bibinfo{author}{H.~Gu}, \bibinfo{author}{C.~Fan},
+\newblock \bibinfo{title}{Spatiotemporal dynamic of covid-19 diffusion in
+  china: A dynamic spatial autoregressive model analysis},
+\newblock \bibinfo{journal}{ISPRS International Journal of Geo-Information}
+  \bibinfo{volume}{10} (\bibinfo{year}{2021}).
+%Type = Article
+\bibitem[{Ramírez-Aldana et~al.(2021)Ramírez-Aldana, Gomez-Verjan,
+  Bello-Chavolla, and García-Peña}]{Ramrez-Aldana2021}
+\bibinfo{author}{R.~Ramírez-Aldana}, \bibinfo{author}{J.~C. Gomez-Verjan},
+  \bibinfo{author}{O.~Y. Bello-Chavolla}, \bibinfo{author}{C.~García-Peña},
+\newblock \bibinfo{title}{Spatial epemiological study of the distribution,
+  clustering, and risk factors associated with early cov-19 mortality in
+  mexico},
+\newblock \bibinfo{journal}{PLoS ONE} \bibinfo{volume}{16}
+  (\bibinfo{year}{2021}).
+%Type = Article
+\bibitem[{Han et~al.(2021)Han, Yang, Jia, Li, Feng, Chen, Zhao, and
+  Pereira}]{Han2021}
+\bibinfo{author}{Y.~Han}, \bibinfo{author}{L.~Yang}, \bibinfo{author}{K.~Jia},
+  \bibinfo{author}{J.~Li}, \bibinfo{author}{S.~Feng},
+  \bibinfo{author}{W.~Chen}, \bibinfo{author}{W.~Zhao},
+  \bibinfo{author}{P.~Pereira},
+\newblock \bibinfo{title}{Spatial distribution characteristics of the covid-19
+  pandemic in beijing and its relationship with environmental factors},
+\newblock \bibinfo{journal}{Science of the Total Environment}
+  \bibinfo{volume}{761} (\bibinfo{year}{2021}).
+%Type = Article
+\bibitem[{Dutta et~al.(2021)Dutta, Basu, and Das}]{Dutta2021}
+\bibinfo{author}{I.~Dutta}, \bibinfo{author}{T.~Basu},
+  \bibinfo{author}{A.~Das},
+\newblock \bibinfo{title}{Spatial analysis of covid-19 incidence and its
+  determinants using spatial modeling: A study on india},
+\newblock \bibinfo{journal}{Environmental Challenges} \bibinfo{volume}{4}
+  (\bibinfo{year}{2021}).
+%Type = Article
+\bibitem[{Bherwani et~al.(2021)Bherwani, Anjum, Kumar, Gautam, Gupta, Kumbhare,
+  Anshul, and Kumar}]{Bherwani2021}
+\bibinfo{author}{H.~Bherwani}, \bibinfo{author}{S.~Anjum},
+  \bibinfo{author}{S.~Kumar}, \bibinfo{author}{S.~Gautam},
+  \bibinfo{author}{A.~Gupta}, \bibinfo{author}{H.~Kumbhare},
+  \bibinfo{author}{A.~Anshul}, \bibinfo{author}{R.~Kumar},
+\newblock \bibinfo{title}{Understanding covid-19 transmission through bayesian
+  probabilistic modeling and gis-based voronoi approach: a policy perspective},
+\newblock \bibinfo{journal}{Environment, Development and Sustainability}
+  \bibinfo{volume}{23} (\bibinfo{year}{2021}) \bibinfo{pages}{5846--5864}.
+%Type = Article
+\bibitem[{Parvin et~al.(2021)Parvin, Ali, Hashmi, and Ahmad}]{Parvin2021}
+\bibinfo{author}{F.~Parvin}, \bibinfo{author}{S.~A. Ali},
+  \bibinfo{author}{S.~N.~I. Hashmi}, \bibinfo{author}{A.~Ahmad},
+\newblock \bibinfo{title}{Spatial prediction and mapping of the covid-19
+  hotspot in india using geostatistical technique},
+\newblock \bibinfo{journal}{Spatial Information Research} \bibinfo{volume}{29}
+  (\bibinfo{year}{2021}) \bibinfo{pages}{479--494}.
+%Type = Article
+\bibitem[{Wheeler et~al.(2022)Wheeler, Patten, Wi, Bublitz, Ryu, Ristagno, and
+  Juhn}]{Wheeler2022}
+\bibinfo{author}{P.~H. Wheeler}, \bibinfo{author}{C.~A. Patten},
+  \bibinfo{author}{C.~I. Wi}, \bibinfo{author}{J.~T. Bublitz},
+  \bibinfo{author}{E.~Ryu}, \bibinfo{author}{E.~H. Ristagno},
+  \bibinfo{author}{Y.~J. Juhn},
+\newblock \bibinfo{title}{Role of geographic risk factors and social
+  determinants of health in covid-19 epidemiology: Longitudinal geospatial
+  analysis in a midwest rural region},
+\newblock \bibinfo{journal}{Journal of Clinical and Translational Science}
+  \bibinfo{volume}{6} (\bibinfo{year}{2022}).
+%Type = Misc
+\bibitem[{Aristizábal(2024)}]{Aristizabal2024}
+\bibinfo{author}{E.~Aristizábal}, \bibinfo{title}{Libro guía del curso
+  análisis geoespacial}, \bibinfo{howpublished}{Universidad Nacional de
+  Colombia, Departamento de Geociencias y Medio Ambiente, Facultad de Minas},
+  \bibinfo{year}{2024}. \URLprefix
+  \url{https://edieraristizabal.github.io/Libro_AnalisisGeoespacial/intro.html},
+  \bibinfo{note}{accessed: 2025-06-02}.
+%Type = Article
+\bibitem[{Das et~al.(2022)Das, Igoe, Lenhart, Luong, Lanzas, Lloyd, and
+  Odoi}]{Das2022}
+\bibinfo{author}{P.~Das}, \bibinfo{author}{M.~Igoe},
+  \bibinfo{author}{S.~Lenhart}, \bibinfo{author}{L.~Luong},
+  \bibinfo{author}{C.~Lanzas}, \bibinfo{author}{A.~L. Lloyd},
+  \bibinfo{author}{A.~Odoi},
+\newblock \bibinfo{title}{Geographic disparities and determinants of covid-19
+  incidence risk in the greater st. louis area, missouri (united states)},
+\newblock \bibinfo{journal}{PLoS ONE} \bibinfo{volume}{17}
+  (\bibinfo{year}{2022}).
+%Type = Article
+\bibitem[{Chaparro-Narváez(2021)}]{Chaparro2021}
+\bibinfo{author}{P.~E. Chaparro-Narváez},
+\newblock \bibinfo{title}{Boletín técnico interactivo mortalidad por covid-19
+  en colombia}  (\bibinfo{year}{2021}) \bibinfo{pages}{2021}.
+%Type = Article
+\bibitem[{Paternina-Caicedo et~al.(2022)Paternina-Caicedo, Alvis-Guzmán,
+  Duenãs, Narvaez, Smith, and Hoz-Restrepo}]{Paternina-Caicedo2022}
+\bibinfo{author}{A.~Paternina-Caicedo}, \bibinfo{author}{N.~Alvis-Guzmán},
+  \bibinfo{author}{C.~Duenãs}, \bibinfo{author}{J.~Narvaez},
+  \bibinfo{author}{A.~D. Smith}, \bibinfo{author}{F.~D.~L. Hoz-Restrepo},
+\newblock \bibinfo{title}{Impact of mobility restrictions on the dynamics of
+  transmission of covid-19 in colombian cities},
+\newblock \bibinfo{journal}{International Health} \bibinfo{volume}{14}
+  (\bibinfo{year}{2022}) \bibinfo{pages}{332--335}.
+%Type = Article
+\bibitem[{Forkuo et~al.(2025)Forkuo, Nihi, Ojo, Nwokedi, and
+  Soyege}]{AdelaideYeboahForkuo2025}
+\bibinfo{author}{A.~Y. Forkuo}, \bibinfo{author}{T.~V. Nihi},
+  \bibinfo{author}{O.~O. Ojo}, \bibinfo{author}{C.~N. Nwokedi},
+  \bibinfo{author}{O.~S. Soyege},
+\newblock \bibinfo{title}{A conceptual model for geospatial analytics in
+  disease surveillance and epidemiological forecasting},
+\newblock \bibinfo{journal}{International Medical Science Research Journal}
+  \bibinfo{volume}{5} (\bibinfo{year}{2025}) \bibinfo{pages}{30--57}.
+%Type = Article
+\bibitem[{Roy et~al.(2021)Roy, Saha, Dhar, Pandit, and Nasrin}]{Roy2021}
+\bibinfo{author}{S.~Roy}, \bibinfo{author}{M.~Saha}, \bibinfo{author}{B.~Dhar},
+  \bibinfo{author}{S.~Pandit}, \bibinfo{author}{R.~Nasrin},
+\newblock \bibinfo{title}{Geospatial analysis of covid-19 lockdown effects on
+  air quality in the south and southeast asian region},
+\newblock \bibinfo{journal}{Science of the Total Environment}
+  \bibinfo{volume}{756} (\bibinfo{year}{2021}).
+%Type = Misc
+\bibitem[{{Departamento Administrativo Nacional de Estadística
+  (DANE)}(2025)}]{DANE_co}
+\bibinfo{author}{{Departamento Administrativo Nacional de Estadística
+  (DANE)}}, \bibinfo{title}{Geoportal dane}, \bibinfo{year}{2025}. \URLprefix
+  \url{https://geoportal.dane.gov.co}, \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Misc
+\bibitem[{{Secretaria Seccional de Salud y Proteccion Social de
+  Antioquia}(2024)}]{DSSA_co}
+\bibinfo{author}{{Secretaria Seccional de Salud y Proteccion Social de
+  Antioquia}}, \bibinfo{year}{2024}. \URLprefix \url{https://dssa.gov.co},
+  \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Misc
+\bibitem[{{Instituto Nacional de Salud (INS)}(2025)}]{INS_co}
+\bibinfo{author}{{Instituto Nacional de Salud (INS)}}, \bibinfo{title}{Covid-19
+  en colombia}, \bibinfo{year}{2025}. \URLprefix \url{https://www.ins.gov.co/},
+  \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Misc
+\bibitem[{{Ministerio de Tecnologías de la Información y las Comunicaciones
+  de Colombia}(2024)}]{DATOS_co}
+\bibinfo{author}{{Ministerio de Tecnologías de la Información y las
+  Comunicaciones de Colombia}}, \bibinfo{title}{Datos abiertos colombia},
+  \bibinfo{year}{2024}. \URLprefix \url{https://www.datos.gov.co},
+  \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Misc
+\bibitem[{{Gobernación de Antioquia}(2024)}]{ANT_co}
+\bibinfo{author}{{Gobernación de Antioquia}}, \bibinfo{title}{{Geoportal de la
+  Gobernación de Antioquia}}, \bibinfo{year}{2024}. \URLprefix
+  \url{https://geodatos-gobantioquia.opendata.arcgis.com/},
+  \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Article
+\bibitem[{Farr et~al.(2007)Farr, Rosen, Caro, Crippen, Duren, Hensley, Kobrick,
+  Paller, Rodriguez, Roth, Seal, Shaffer, Shimada, Umland, Werner, Oskin,
+  Burbank, and Alsdorf}]{Farr2007}
+\bibinfo{author}{T.~Farr}, \bibinfo{author}{P.~Rosen},
+  \bibinfo{author}{E.~Caro}, \bibinfo{author}{R.~Crippen},
+  \bibinfo{author}{R.~Duren}, \bibinfo{author}{S.~Hensley},
+  \bibinfo{author}{M.~Kobrick}, \bibinfo{author}{M.~Paller},
+  \bibinfo{author}{E.~Rodriguez}, \bibinfo{author}{L.~Roth},
+  \bibinfo{author}{D.~Seal}, \bibinfo{author}{S.~Shaffer},
+  \bibinfo{author}{J.~Shimada}, \bibinfo{author}{J.~Umland},
+  \bibinfo{author}{M.~Werner}, \bibinfo{author}{M.~Oskin},
+  \bibinfo{author}{D.~Burbank}, \bibinfo{author}{D.~Alsdorf},
+\newblock \bibinfo{title}{The shuttle radar topography mission},
+\newblock \bibinfo{journal}{Reviews of Geophysics} \bibinfo{volume}{45}
+  (\bibinfo{year}{2007}) \bibinfo{pages}{RG2004}.
+%Type = Article
+\bibitem[{Hijmans et~al.(2005)Hijmans, Cameron, Parra, Jones, and
+  Jarvis}]{Hijmans2005}
+\bibinfo{author}{R.~Hijmans}, \bibinfo{author}{S.~Cameron},
+  \bibinfo{author}{J.~Parra}, \bibinfo{author}{P.~Jones},
+  \bibinfo{author}{A.~Jarvis},
+\newblock \bibinfo{title}{Very high resolution interpolated climate surfaces
+  for global land areas},
+\newblock \bibinfo{journal}{International Journal of Climatology}
+  \bibinfo{volume}{25} (\bibinfo{year}{2005}) \bibinfo{pages}{1965--1978}.
+%Type = Misc
+\bibitem[{Muñoz~Sabater(2019)}]{MunozSabater2019}
+\bibinfo{author}{J.~Muñoz~Sabater}, \bibinfo{title}{Era5-land monthly averaged
+  data from 1981 to present}, \bibinfo{howpublished}{Copernicus Climate Change
+  Service (C3S) Climate Data Store (CDS)}, \bibinfo{year}{2019}.
+  \DOIprefix\doi{10.24381/cds.68d2bb30}, \bibinfo{note}{accessed: 2025-05-01}.
+%Type = Article
+\bibitem[{Yi et~al.(2021)Yi, Ng, Farwin, Low, Chang, and Lim}]{Yi2021}
+\bibinfo{author}{H.~Yi}, \bibinfo{author}{S.~T. Ng},
+  \bibinfo{author}{A.~Farwin}, \bibinfo{author}{A.~P.~T. Low},
+  \bibinfo{author}{C.~M. Chang}, \bibinfo{author}{J.~Lim},
+\newblock \bibinfo{title}{Health equity considerations in covid-19: geospatial
+  network analysis of the covid-19 outbreak in the migrant population in
+  singapore},
+\newblock \bibinfo{journal}{Journal of Travel Medicine} \bibinfo{volume}{28}
+  (\bibinfo{year}{2021}).
+%Type = Article
+\bibitem[{Putri et~al.(2023)Putri, Agustian, Apriani, and Ilyas}]{Putri2023}
+\bibinfo{author}{D.~I.~P. Putri}, \bibinfo{author}{D.~Agustian},
+  \bibinfo{author}{L.~Apriani}, \bibinfo{author}{R.~Ilyas},
+\newblock \bibinfo{title}{Spatial and temporal analysis of covid-19 cases in
+  west java, indonesia and its influencing factors},
+\newblock \bibinfo{journal}{International Journal of Environmental Research and
+  Public Health} \bibinfo{volume}{20} (\bibinfo{year}{2023}).
+
+\end{thebibliography}

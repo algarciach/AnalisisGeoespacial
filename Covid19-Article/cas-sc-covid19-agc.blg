@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: cas-sc-covid19-agc.aux
+The style file: model1-num-names.bst
+Database file #1: covid19-refs.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty journal in Chaparro2021
+You've used 28 entries,
+            2910 wiz_defined-function locations,
+            835 strings with 12439 characters,
+and the built_in function-call counts, 18731 in all, are:
+= -- 1265
+> -- 1116
+< -- 9
++ -- 424
+- -- 390
+* -- 2409
+:= -- 2872
+add.period$ -- 37
+call.type$ -- 28
+change.case$ -- 276
+chr.to.int$ -- 28
+cite$ -- 29
+duplicate$ -- 1223
+empty$ -- 1057
+format.name$ -- 458
+if$ -- 3282
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 298
+newline$ -- 138
+num.names$ -- 112
+pop$ -- 375
+preamble$ -- 1
+purify$ -- 270
+quote$ -- 0
+skip$ -- 297
+stack$ -- 0
+substring$ -- 543
+swap$ -- 1072
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 252
+warning$ -- 1
+while$ -- 95
+width$ -- 0
+write$ -- 371
+(There was 1 warning)
